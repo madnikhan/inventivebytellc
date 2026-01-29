@@ -172,9 +172,12 @@ export async function createEvent(eventData: EventData): Promise<string> {
       throw new Error("GOOGLE_CALENDAR_ID is not configured");
     }
 
+    // Build event description with attendee info (since we can't add attendees directly)
+    const eventDescription = `${eventData.description}\n\nAttendee: ${eventData.attendeeEmail}`;
+
     const event = {
       summary: eventData.summary,
-      description: eventData.description,
+      description: eventDescription,
       start: {
         dateTime: eventData.start.toISOString(),
         timeZone: process.env.CALENDAR_TIMEZONE || "America/Denver",
@@ -183,10 +186,9 @@ export async function createEvent(eventData: EventData): Promise<string> {
         dateTime: eventData.end.toISOString(),
         timeZone: process.env.CALENDAR_TIMEZONE || "America/Denver",
       },
-      // Note: Attendees are added but invites won't be sent automatically
-      // Service accounts require Domain-Wide Delegation to send invites
-      // Email notifications are sent via SMTP instead
-      attendees: [{ email: eventData.attendeeEmail }],
+      // Note: Attendees field removed - service accounts cannot add attendees without Domain-Wide Delegation
+      // The attendee email is included in the description instead
+      // Email notifications with calendar details are sent via SMTP
       location: eventData.location,
       reminders: {
         useDefault: false,

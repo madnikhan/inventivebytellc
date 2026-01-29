@@ -62,7 +62,9 @@ export async function POST(req: NextRequest) {
         `,
       });
 
-      // Email to user
+      // Email to user with calendar details
+      const calendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Appointment: ${name} - ${serviceType}`)}&dates=${startDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z/${endDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z&details=${encodeURIComponent(`Appointment with ${name}\n\nService Type: ${serviceType}\n\n${message ? `Message: ${message}` : ''}`)}`;
+      
       await transporter.sendMail({
         from: `"InventiveByte LLC" <${process.env.SMTP_USER}>`,
         to: email,
@@ -73,6 +75,7 @@ export async function POST(req: NextRequest) {
           <p>Your appointment has been scheduled successfully!</p>
           <p><strong>Date & Time:</strong> ${startDate.toLocaleString()}</p>
           <p><strong>Service:</strong> ${serviceType}</p>
+          <p><a href="${calendarLink}" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #4285f4; color: white; text-decoration: none; border-radius: 5px;">Add to Google Calendar</a></p>
           <p>We look forward to meeting with you. If you need to reschedule or have any questions, please don't hesitate to contact us.</p>
           <p>Best regards,<br>InventiveByte LLC</p>
         `,

@@ -1,115 +1,171 @@
 "use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
-import BrandCard from "../components/BrandCard";
+import HeroSection from "@/components/ui/HeroSection";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import PortfolioCard from "@/components/portfolio/PortfolioCard";
+import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
+import GradientButton from "@/components/ui/GradientButton";
 import { useRouter } from "next/navigation";
-
-const brandTeasers = [
-  {
-    title: "Inventix Studio",
-    description: "Our flagship: A creative software house delivering custom SaaS solutions, web apps, and digital products for businesses worldwide.",
-    href: "/brands#inventix-studio",
-    featured: true,
-    logoSrc: "/brands/inventix-logo.svg",
-  },
-  {
-    title: "ZapTools",
-    description: "A suite of free, fast, and easy-to-use online tools designed to simplify everyday tasks for everyone.",
-    href: "/brands#zaptools",
-    featured: true,
-    logoSrc: "/brands/zaptools-logo.svg",
-  },
-  {
-    title: "BritRecruit",
-    description: "A UK-focused recruitment project — one of our smaller ventures, connecting employers and job seekers with modern hiring tools.",
-    href: "/brands#britrecruit",
-    featured: false,
-    logoSrc: "/brands/britrecruit-logo.svg",
-  },
-  {
-    title: "New Brands Coming Soon!",
-    description: "We're always working on new ideas. Interested in partnering or pitching a project? Contact us!",
-    href: "/contact",
-    featured: false,
-    comingSoon: true,
-    logoSrc: undefined,
-  },
-];
+import { Code, Users, Rocket, Award } from "lucide-react";
+import { usePortfolio } from "@/hooks/usePortfolio";
 
 export default function Home() {
   const router = useRouter();
+  const { projects: portfolioProjects, loading: portfolioLoading } = usePortfolio();
+  const featuredProjects = portfolioProjects.filter((p) => p.featured).slice(0, 3);
+  const featuredTestimonials = 3;
+
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen text-black px-6 py-20 space-y-12">
-      <img
-        src="/inventivebyte-logo.png"
-        alt="InventiveByte LLC logo"
-        className="h-32 w-auto mb-6"
+    <main className="min-h-screen">
+      {/* Hero Section */}
+      <HeroSection
+        title="InventiveByte LLC"
+        subtitle="Innovation Meets Excellence"
+        description="We launch, incubate, and scale innovative SaaS brands and digital products — building the future from Montana, USA."
+        primaryCTA={{
+          text: "Schedule Free Consultation",
+          href: "/appointment",
+        }}
+        secondaryCTA={{
+          text: "Get Started",
+          href: "/get-started",
+        }}
       />
-      <motion.h1
-        className="text-6xl md:text-8xl font-extrabold text-center mb-6 tracking-tight select-none"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        InventiveByte LLC
-      </motion.h1>
-      <motion.p
-        className="text-2xl md:text-3xl text-center text-gray-700 max-w-3xl mb-8 leading-relaxed"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-      >
-        We launch, incubate, and scale innovative SaaS brands and digital products — building the future from Montana, USA.
-      </motion.p>
-      <section className="max-w-2xl text-center text-lg md:text-xl leading-relaxed mb-12">
-        <p>
-          InventiveByte LLC is a Montana-registered parent company dedicated to creating, launching, and growing new digital brands. Our mission is to turn bold ideas into successful SaaS platforms, online tools, and technology ventures that help people work smarter and connect better. We&rsquo;re always exploring new opportunities and building the next generation of digital solutions.
-        </p>
-      </section>
-      {/* Modern Card/Panel for Brands Section */}
-      <section className="w-full max-w-5xl mb-12">
-        <div className="rounded-3xl shadow-lg px-8 py-12 md:py-16 md:px-12 mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 tracking-tight">Our Brands & Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {brandTeasers.map((brand) => (
-              <BrandCard
-                key={brand.title}
-                title={brand.title}
-                description={brand.description}
-                logoSrc={brand.logoSrc}
-                onClick={() => router.push(brand.href)}
-                badge={
-                  brand.comingSoon ? (
-                    <span className="inline-block px-3 py-1 text-xs bg-[#b0b6be]/40 text-[#222] rounded-full font-semibold tracking-wide shadow">Coming Soon</span>
-                  ) : undefined
-                }
-              />
-            ))}
+
+      {/* Stats Section */}
+      <AnimatedSection className="py-20 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { icon: Code, value: portfolioProjects.length, label: "Projects Completed" },
+            { icon: Users, value: "50+", label: "Happy Clients" },
+            { icon: Rocket, value: "10+", label: "Brands Launched" },
+            { icon: Award, value: "100%", label: "Client Satisfaction" },
+          ].map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="text-center p-6 rounded-2xl bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] border border-white/10 hover:border-[#00D9FF]/50 transition-all"
+            >
+              <stat.icon className="w-8 h-8 mx-auto mb-4 text-[#00D9FF]" />
+              <div className="text-3xl font-bold gradient-text mb-2">{stat.value}</div>
+              <div className="text-gray-400 text-sm">{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
+      </AnimatedSection>
+
+      {/* Featured Portfolio Section */}
+      <AnimatedSection delay={0.2} className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+              Featured Projects
+            </h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Explore some of our most innovative and impactful projects
+            </p>
+          </div>
+
+          {portfolioLoading ? (
+            <div className="text-center py-20">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#00D9FF]"></div>
+              <p className="text-gray-400 mt-4">Loading projects...</p>
+            </div>
+          ) : featuredProjects.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              {featuredProjects.map((project, index) => (
+                <PortfolioCard
+                  key={project.id}
+                  project={project}
+                  onClick={() => router.push(`/portfolio#${project.id}`)}
+                  index={index}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <p className="text-gray-400">No featured projects available</p>
+            </div>
+          )}
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/portfolio">
+              <GradientButton variant="outline" size="lg">
+                View All Projects →
+              </GradientButton>
+            </Link>
+            <Link href="/quote">
+              <GradientButton variant="accent" size="lg">
+                Request Quote →
+              </GradientButton>
+            </Link>
           </div>
         </div>
-      </section>
-      <motion.div
-        className="mt-12 w-full max-w-2xl mx-auto bg-white/60 backdrop-blur-md rounded-2xl shadow-lg px-8 py-10 flex flex-col items-center border-2 border-[#b0b6be]/40"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7, delay: 0.2 }}
-      >
-        <div className="flex items-center gap-3 mb-4">
-          <svg width="32" height="32" fill="none" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#b0b6be" fillOpacity="0.15"/><path d="M16 9v10m0 4h.01" stroke="#222" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          <h2 className="text-2xl md:text-3xl font-bold text-center tracking-tight">Have a bold idea?</h2>
+      </AnimatedSection>
+
+      {/* Testimonials Preview */}
+      <AnimatedSection delay={0.3} className="py-20 px-6 bg-gradient-to-br from-[#0a0a0f] to-[#1a1a2e]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+              What Our Clients Say
+            </h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Don&apos;t just take our word for it — hear from those we&apos;ve worked with
+            </p>
+          </div>
+
+          <TestimonialsSection limit={featuredTestimonials} />
+
+          <div className="text-center mt-12">
+            <Link href="/testimonials">
+              <GradientButton variant="accent" size="lg">
+                Read All Testimonials →
+              </GradientButton>
+            </Link>
+          </div>
         </div>
-        <p className="text-center text-lg md:text-xl text-gray-700 mb-6 max-w-xl">We&rsquo;re always looking for new opportunities and partners. Let&rsquo;s connect and build something great together.</p>
+      </AnimatedSection>
+
+      {/* CTA Section */}
+      <AnimatedSection delay={0.4} className="py-20 px-6">
         <motion.div
-          whileHover={{ scale: 1.06 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-full flex justify-center"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto text-center p-12 rounded-3xl bg-gradient-to-br from-[#00D9FF]/10 via-[#B026FF]/10 to-[#FF0066]/10 border border-[#00D9FF]/30 backdrop-blur-sm"
         >
-          <Link href="/contact" className="px-8 py-4 rounded-xl border-2 border-[#b0b6be] bg-black/90 text-white font-bold text-lg shadow transition-all duration-200 hover:bg-black hover:border-black focus:outline-none focus:ring-2 focus:ring-[#b0b6be] focus:ring-offset-2">
-            Let&rsquo;s build something great together &rarr;
-          </Link>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+            Ready to Build Something Amazing?
+          </h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Let&apos;s collaborate and turn your bold ideas into successful digital products. 
+            We&apos;re always looking for new opportunities and partners.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/appointment">
+              <GradientButton variant="primary" size="lg">
+                Schedule Consultation
+              </GradientButton>
+            </Link>
+            <Link href="/quote">
+              <GradientButton variant="accent" size="lg">
+                Get a Quote
+              </GradientButton>
+            </Link>
+            <Link href="/get-started">
+              <GradientButton variant="outline" size="lg">
+                Get Started
+              </GradientButton>
+            </Link>
+          </div>
         </motion.div>
-      </motion.div>
+      </AnimatedSection>
     </main>
   );
 }

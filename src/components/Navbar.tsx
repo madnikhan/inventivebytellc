@@ -23,6 +23,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0 mr-4 group" aria-label="InventiveByte Home">
           <div className="logo-container relative inline-block">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src="/inventivebyte-logo.png" 
               alt="InventiveByte LLC Logo" 

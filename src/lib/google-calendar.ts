@@ -167,7 +167,6 @@ export async function createEvent(eventData: EventData): Promise<string> {
   try {
     const calendar = getCalendarClient();
     const calendarId = process.env.GOOGLE_CALENDAR_ID || "";
-    const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || "";
 
     if (!calendarId) {
       throw new Error("GOOGLE_CALENDAR_ID is not configured");
@@ -202,11 +201,13 @@ export async function createEvent(eventData: EventData): Promise<string> {
     });
 
     return response.data.id || "";
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error creating calendar event:", error);
     
+    const errorObj = error as { code?: string | number; message?: string };
+    
     // Provide helpful error messages
-    if (error.code === 404) {
+    if (errorObj.code === 404) {
       const calendarId = process.env.GOOGLE_CALENDAR_ID || "";
       const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || "";
       throw new Error(
@@ -218,7 +219,7 @@ export async function createEvent(eventData: EventData): Promise<string> {
       );
     }
     
-    if (error.code === 403) {
+    if (errorObj.code === 403) {
       const calendarId = process.env.GOOGLE_CALENDAR_ID || "";
       const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || "";
       throw new Error(

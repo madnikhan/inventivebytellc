@@ -41,7 +41,7 @@ export async function GET() {
         },
         serviceAccount: serviceAccountEmail,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Test 2: Try to list calendars to see what's accessible
       try {
         const calendarList = await calendar.calendarList.list();
@@ -51,23 +51,26 @@ export async function GET() {
           accessRole: cal.accessRole,
         }));
 
+        const errorObj = error as { code?: string | number; message?: string };
         return NextResponse.json({
           success: false,
           error: `Cannot access calendar "${calendarId}"`,
-          errorCode: error.code,
-          errorMessage: error.message,
+          errorCode: errorObj.code,
+          errorMessage: errorObj.message,
           accessibleCalendars,
           suggestion: accessibleCalendars?.length
             ? `Try using one of these calendar IDs: ${accessibleCalendars.map((c) => c.id).join(", ")}`
             : "No calendars accessible. Make sure calendar is shared with service account.",
         });
-      } catch (listError: any) {
+      } catch (listError: unknown) {
+        const errorObj = error as { code?: string | number; message?: string };
+        const listErrorObj = listError as { message?: string };
         return NextResponse.json({
           success: false,
           error: "Cannot access calendar",
-          errorCode: error.code,
-          errorMessage: error.message,
-          listError: listError.message,
+          errorCode: errorObj.code,
+          errorMessage: errorObj.message,
+          listError: listErrorObj.message,
           troubleshooting: {
             step1: `Verify calendar "${calendarId}" is shared with "${serviceAccountEmail}"`,
             step2: "Set permission to 'Make changes to events'",
@@ -77,13 +80,14 @@ export async function GET() {
         });
       }
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorObj = error as { message?: string; code?: string | number };
     return NextResponse.json(
       {
         success: false,
         error: "Test failed",
-        message: error.message,
-        code: error.code,
+        message: errorObj.message || "Unknown error",
+        code: errorObj.code,
       },
       { status: 500 }
     );

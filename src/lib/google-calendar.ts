@@ -183,6 +183,9 @@ export async function createEvent(eventData: EventData): Promise<string> {
         dateTime: eventData.end.toISOString(),
         timeZone: process.env.CALENDAR_TIMEZONE || "America/Denver",
       },
+      // Note: Attendees are added but invites won't be sent automatically
+      // Service accounts require Domain-Wide Delegation to send invites
+      // Email notifications are sent via SMTP instead
       attendees: [{ email: eventData.attendeeEmail }],
       location: eventData.location,
       reminders: {
@@ -194,10 +197,12 @@ export async function createEvent(eventData: EventData): Promise<string> {
       },
     };
 
+    // Don't use sendUpdates - service accounts can't send invites without Domain-Wide Delegation
+    // Calendar invites are handled via email notifications instead
     const response = await calendar.events.insert({
       calendarId,
       requestBody: event,
-      sendUpdates: "all",
+      // Removed sendUpdates: "all" - service accounts need domain-wide delegation for this
     });
 
     return response.data.id || "";
@@ -222,12 +227,25 @@ export async function createEvent(eventData: EventData): Promise<string> {
     if (errorObj.code === 403) {
       const calendarId = process.env.GOOGLE_CALENDAR_ID || "";
       const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || "";
+      const errorMessage = errorObj.message || "";
+      
+      // Check if it's the domain-wide delegation error
+      if (errorMessage.includes("Domain-Wide Delegation") || errorMessage.includes("invite attendees")) {
+        throw new Error(
+          `Service accounts cannot send calendar invites without Domain-Wide Delegation. ` +
+          `Calendar event will be created without automatic invites. ` +
+          `Email notifications are sent via SMTP instead. ` +
+          `Original error: ${errorMessage}`
+        );
+      }
+      
       throw new Error(
         `Permission denied (403). ` +
         `Service account "${serviceAccountEmail}" cannot access calendar "${calendarId}". ` +
         `Even if you've shared it, try: 1) Wait 2-3 minutes for propagation, 2) Remove and re-add service account, ` +
         `3) Verify permission is exactly "Make changes to events", 4) Restart dev server. ` +
-        `Test at: http://localhost:3000/api/calendar/test`
+        `Test at: http://localhost:3000/api/calendar/test. ` +
+        `Error: ${errorMessage}`
       );
     }
     

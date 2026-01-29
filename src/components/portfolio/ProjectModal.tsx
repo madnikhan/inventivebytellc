@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import {
   Dialog,
@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ExternalLink, Github, Calendar, Play } from "lucide-react";
+import { normalizeVideoUrl } from "@/lib/utils";
 import ImageGallery from "./ImageGallery";
 import TechStackBadge from "./TechStackBadge";
 import { PortfolioProject } from "@/data/portfolio";
@@ -33,6 +34,7 @@ interface ProjectModalProps {
 
 export default function ProjectModal({ project, open, onOpenChange }: ProjectModalProps) {
   const [showVideo, setShowVideo] = useState(false);
+  const videoUrl = useMemo(() => normalizeVideoUrl(project?.video), [project?.video]);
 
   if (!project) return null;
 
@@ -51,14 +53,14 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
         <div className="space-y-6">
           {/* Media Section */}
           <div className="relative">
-            {project.video && showVideo ? (
+            {videoUrl && showVideo ? (
               <div className="relative w-full h-[400px] rounded-xl overflow-hidden bg-black">
                 <ReactPlayer
-                  url={project.video}
+                  url={videoUrl}
                   width="100%"
                   height="100%"
                   controls
-                  playing
+                  playing={false}
                 />
                 <button
                   onClick={() => setShowVideo(false)}
@@ -69,7 +71,7 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
               </div>
             ) : (
               <>
-                {project.video && (
+                {videoUrl && (
                   <button
                     onClick={() => setShowVideo(true)}
                     className="absolute top-4 right-4 z-10 px-4 py-2 rounded-lg bg-gradient-to-r from-[#00D9FF] to-[#0066FF] text-black font-semibold hover:opacity-90 transition-opacity flex items-center gap-2"

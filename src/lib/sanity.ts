@@ -49,20 +49,46 @@ export interface SanityTestimonial {
   };
 }
 
-// Create Sanity client
-export const sanityClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  useCdn: process.env.NODE_ENV === 'production',
-  apiVersion: '2024-01-01',
-  token: process.env.SANITY_API_TOKEN, // Optional, for authenticated requests
-});
+// Lazy Sanity client creation - only create if projectId is configured
+let sanityClient: ReturnType<typeof createClient> | null = null;
 
-// Image URL builder
-const builder = createImageUrlBuilder(sanityClient);
+function getSanityClient() {
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+  
+  // Don't create client if projectId is missing (allows build to succeed without Sanity)
+  if (!projectId) {
+    return null;
+  }
+
+  if (!sanityClient) {
+    sanityClient = createClient({
+      projectId,
+      dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+      useCdn: process.env.NODE_ENV === 'production',
+      apiVersion: '2024-01-01',
+      token: process.env.SANITY_API_TOKEN, // Optional, for authenticated requests
+    });
+  }
+
+  return sanityClient;
+}
+
+// Image URL builder - lazy initialization
+let builder: ReturnType<typeof createImageUrlBuilder> | null = null;
+
+function getImageBuilder() {
+  const client = getSanityClient();
+  if (!client) {
+    throw new Error('Sanity client not configured. Set NEXT_PUBLIC_SANITY_PROJECT_ID environment variable.');
+  }
+  if (!builder) {
+    builder = createImageUrlBuilder(client);
+  }
+  return builder;
+}
 
 export function urlFor(source: SanityImageSource) {
-  return builder.image(source);
+  return getImageBuilder().image(source);
 }
 
 // GROQ Queries
@@ -164,7 +190,11 @@ export const testimonialsQuery = `*[_type == "testimonial"] | order(_createdAt d
 // Helper functions to fetch data
 export async function getPortfolioProjects(): Promise<SanityPortfolioProject[]> {
   try {
-    const projects = await sanityClient.fetch<SanityPortfolioProject[]>(portfolioQuery);
+    const client = getSanityClient();
+    if (!client) {
+      return []; // Return empty array if Sanity not configured
+    }
+    const projects = await client.fetch<SanityPortfolioProject[]>(portfolioQuery);
     return projects;
   } catch (error) {
     console.error('Error fetching portfolio projects:', error);
@@ -174,7 +204,11 @@ export async function getPortfolioProjects(): Promise<SanityPortfolioProject[]> 
 
 export async function getFeaturedPortfolioProjects(): Promise<SanityPortfolioProject[]> {
   try {
-    const projects = await sanityClient.fetch<SanityPortfolioProject[]>(featuredPortfolioQuery);
+    const client = getSanityClient();
+    if (!client) {
+      return []; // Return empty array if Sanity not configured
+    }
+    const projects = await client.fetch<SanityPortfolioProject[]>(featuredPortfolioQuery);
     return projects;
   } catch (error) {
     console.error('Error fetching featured portfolio projects:', error);
@@ -184,7 +218,11 @@ export async function getFeaturedPortfolioProjects(): Promise<SanityPortfolioPro
 
 export async function getPortfolioProjectBySlug(slug: string): Promise<SanityPortfolioProject | null> {
   try {
-    const project = await sanityClient.fetch<SanityPortfolioProject | null>(portfolioBySlugQuery, { slug });
+    const client = getSanityClient();
+    if (!client) {
+      return null; // Return null if Sanity not configured
+    }
+    const project = await client.fetch<SanityPortfolioProject | null>(portfolioBySlugQuery, { slug });
     return project;
   } catch (error) {
     console.error('Error fetching portfolio project:', error);
@@ -194,7 +232,11 @@ export async function getPortfolioProjectBySlug(slug: string): Promise<SanityPor
 
 export async function getTestimonials(): Promise<SanityTestimonial[]> {
   try {
-    const testimonials = await sanityClient.fetch<SanityTestimonial[]>(testimonialsQuery);
+    const client = getSanityClient();
+    if (!client) {
+      return []; // Return empty array if Sanity not configured
+    }
+    const testimonials = await client.fetch<SanityTestimonial[]>(testimonialsQuery);
     return testimonials;
   } catch (error) {
     console.error('Error fetching testimonials:', error);

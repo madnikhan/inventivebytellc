@@ -28,6 +28,10 @@ export async function POST(req: NextRequest) {
       revalidatePath('/testimonials');
       revalidatePath('/');
       revalidateTag('testimonials');
+    } else if (_type === 'resource') {
+      revalidatePath('/resources');
+      revalidatePath('/');
+      revalidateTag('resources');
     } else if (_type) {
       // Unknown type: revalidate portfolio and home so any content change is reflected
       revalidatePath('/portfolio');

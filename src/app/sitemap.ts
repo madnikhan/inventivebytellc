@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { getPortfolioProjects } from "@/lib/sanity";
+import { getPortfolioProjects, getResources } from "@/lib/sanity";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.inventivebytellc.com";
 
@@ -20,9 +20,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/faq`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/resources`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
-    { url: `${baseUrl}/resources/what-is-saas-and-why-it-matters`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${baseUrl}/resources/building-mvp-montana`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${baseUrl}/resources/choosing-tech-stack-2025`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
   ];
 
   let portfolioSlugs: { slug: string }[] = [];
@@ -42,5 +39,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...portfolioEntries];
+  let resourceSlugs: { slug: string }[] = [];
+  try {
+    const resources = await getResources();
+    resourceSlugs = resources
+      .filter((r) => r.slug?.current)
+      .map((r) => ({ slug: r.slug!.current }));
+  } catch {
+    // Fallback: add static resource slugs if Sanity fails
+    resourceSlugs = [
+      { slug: "what-is-saas-and-why-it-matters" },
+      { slug: "building-mvp-montana" },
+      { slug: "choosing-tech-stack-2025" },
+    ];
+  }
+
+  const resourceEntries: MetadataRoute.Sitemap = resourceSlugs.map(({ slug }) => ({
+    url: `${baseUrl}/resources/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...portfolioEntries, ...resourceEntries];
 }

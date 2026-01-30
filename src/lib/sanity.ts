@@ -52,6 +52,18 @@ export interface SanityTestimonial {
   isGoogleReview?: boolean;
 }
 
+// Resource / Blog post type matching Sanity schema
+export interface SanityResource {
+  _id: string;
+  _type: 'resource';
+  title: string;
+  slug: { current: string };
+  excerpt?: string;
+  category?: string;
+  publishedAt?: string;
+  body?: string;
+}
+
 // Lazy Sanity client creation - only create if projectId is configured
 let sanityClient: ReturnType<typeof createClient> | null = null;
 
@@ -182,6 +194,28 @@ export const testimonialsQuery = `*[_type == "testimonial"] | order(_createdAt d
   }
 }`;
 
+export const resourcesQuery = `*[_type == "resource"] | order(publishedAt desc) {
+  _id,
+  _type,
+  title,
+  slug,
+  excerpt,
+  category,
+  publishedAt,
+  body
+}`;
+
+export const resourceBySlugQuery = `*[_type == "resource" && slug.current == $slug][0] {
+  _id,
+  _type,
+  title,
+  slug,
+  excerpt,
+  category,
+  publishedAt,
+  body
+}`;
+
 // Helper functions to fetch data
 export async function getPortfolioProjects(): Promise<SanityPortfolioProject[]> {
   try {
@@ -236,6 +270,34 @@ export async function getTestimonials(): Promise<SanityTestimonial[]> {
   } catch (error) {
     console.error('Error fetching testimonials:', error);
     return [];
+  }
+}
+
+export async function getResources(): Promise<SanityResource[]> {
+  try {
+    const client = getSanityClient();
+    if (!client) {
+      return [];
+    }
+    const resources = await client.fetch<SanityResource[]>(resourcesQuery);
+    return resources;
+  } catch (error) {
+    console.error('Error fetching resources:', error);
+    return [];
+  }
+}
+
+export async function getResourceBySlug(slug: string): Promise<SanityResource | null> {
+  try {
+    const client = getSanityClient();
+    if (!client) {
+      return null;
+    }
+    const resource = await client.fetch<SanityResource | null>(resourceBySlugQuery, { slug });
+    return resource;
+  } catch (error) {
+    console.error('Error fetching resource by slug:', error);
+    return null;
   }
 }
 

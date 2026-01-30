@@ -5,35 +5,11 @@ import Link from "next/link";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { FileText } from "lucide-react";
-
-const resources = [
-  {
-    slug: "what-is-saas-and-why-it-matters",
-    title: "What Is SaaS and Why It Matters for Your Business",
-    excerpt:
-      "A short guide to software-as-a-service: what it is, how it’s priced, and why it’s a strong fit for scaling products.",
-    date: "2025-01-15",
-    category: "Guides",
-  },
-  {
-    slug: "building-mvp-montana",
-    title: "Building an MVP from Montana: Our Approach",
-    excerpt:
-      "How we scope, design, and build minimum viable products so you can validate ideas and iterate with real users.",
-    date: "2025-01-08",
-    category: "Process",
-  },
-  {
-    slug: "choosing-tech-stack-2025",
-    title: "Choosing a Tech Stack in 2025",
-    excerpt:
-      "Frameworks, languages, and infrastructure we use for SaaS and web apps — and when we recommend what.",
-    date: "2024-12-20",
-    category: "Technical",
-  },
-];
+import { useResources } from "@/hooks/useResources";
 
 export default function ResourcesPage() {
+  const { resources, loading } = useResources();
+
   return (
     <div className="min-h-screen pt-20 pb-20 px-6">
       <AnimatedSection className="max-w-4xl mx-auto mb-10">
@@ -60,44 +36,53 @@ export default function ResourcesPage() {
       </AnimatedSection>
 
       <AnimatedSection delay={0.2} className="max-w-4xl mx-auto">
-        <ul className="space-y-6">
-          {resources.map((post, index) => (
-            <motion.li
-              key={post.slug}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.08 }}
-            >
-              <Link
-                href={`/resources/${post.slug}`}
-                className="block p-6 rounded-2xl bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] border border-white/10 hover:border-[#00D9FF]/40 transition-all group"
+        {loading ? (
+          <div className="text-center py-20">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#00D9FF]" />
+            <p className="text-gray-400 mt-4">Loading resources...</p>
+          </div>
+        ) : resources.length > 0 ? (
+          <ul className="space-y-6">
+            {resources.map((post, index) => (
+              <motion.li
+                key={post.slug}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.08 }}
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <span className="text-xs font-medium text-[#00D9FF] uppercase tracking-wider">
-                      {post.category}
-                    </span>
-                    <h2 className="text-xl font-bold text-white mt-1 group-hover:text-[#00D9FF] transition-colors">
-                      {post.title}
-                    </h2>
-                    <p className="text-gray-400 mt-2 line-clamp-2">{post.excerpt}</p>
-                    <time className="text-sm text-gray-500 mt-2 block" dateTime={post.date}>
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </time>
+                <Link
+                  href={`/resources/${post.slug}`}
+                  className="block p-6 rounded-2xl bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] border border-white/10 hover:border-[#00D9FF]/40 transition-all group"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <span className="text-xs font-medium text-[#00D9FF] uppercase tracking-wider">
+                        {post.category}
+                      </span>
+                      <h2 className="text-xl font-bold text-white mt-1 group-hover:text-[#00D9FF] transition-colors">
+                        {post.title}
+                      </h2>
+                      <p className="text-gray-400 mt-2 line-clamp-2">{post.excerpt}</p>
+                      <time className="text-sm text-gray-500 mt-2 block" dateTime={post.date}>
+                        {post.date
+                          ? new Date(post.date).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })
+                          : ""}
+                      </time>
+                    </div>
+                    <FileText className="w-6 h-6 text-gray-500 group-hover:text-[#00D9FF] shrink-0 mt-1" />
                   </div>
-                  <FileText className="w-6 h-6 text-gray-500 group-hover:text-[#00D9FF] shrink-0 mt-1" />
-                </div>
-              </Link>
-            </motion.li>
-          ))}
-        </ul>
+                </Link>
+              </motion.li>
+            ))}
+          </ul>
+        ) : null}
 
         <p className="text-center text-gray-500 mt-10">
-          More articles coming soon. Want a topic covered?{" "}
+          Want a topic covered?{" "}
           <Link href="/contact" className="text-[#00D9FF] hover:underline">
             Let us know
           </Link>

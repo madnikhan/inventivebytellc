@@ -20,17 +20,16 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full glass-effect border-b border-white/10 shadow-lg font-sans">
       <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-4 py-5">
-        {/* Logo */}
+        {/* Logo - your PNG, full brightness so it's visible on dark nav */}
         <Link href="/" className="flex items-center flex-shrink-0 mr-4 group" aria-label="InventiveByte Home">
-          <div className="logo-container relative inline-block">
+          <span className="relative flex items-center justify-center rounded-lg overflow-hidden border border-white/15 bg-white/5 px-2 py-1.5 transition-all group-hover:border-[#00D9FF]/40 group-hover:shadow-[0_0_20px_rgba(0,217,255,0.15)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src="/inventivebyte-logo.png" 
-              alt="InventiveByte LLC Logo" 
-              className="h-12 w-auto drop-shadow-md transition-transform duration-200 group-hover:scale-105 relative z-10" 
+            <img
+              src="/inventivebyte-logo.png"
+              alt="InventiveByte LLC"
+              className="h-11 w-auto object-contain drop-shadow-sm"
             />
-            <div className="logo-gradient-overlay absolute inset-0 bg-gradient-to-r from-[#00D9FF] via-[#B026FF] to-[#FF0066] mix-blend-screen opacity-90 pointer-events-none transition-opacity duration-300 group-hover:opacity-100 group-hover:animate-gradient-shift" />
-          </div>
+          </span>
         </Link>
         {/* Desktop Nav */}
         <div className="hidden md:flex flex-1 justify-center">

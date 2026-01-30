@@ -59,7 +59,10 @@ export default {
       category: 'category',
       publishedAt: 'publishedAt',
     },
-    prepare({ title, category, publishedAt }: { title: string; category?: string; publishedAt?: string }) {
+    prepare(value: Record<string, unknown>) {
+      const title = value.title as string | undefined;
+      const category = value.category as string | undefined;
+      const publishedAt = value.publishedAt as string | undefined;
       const date = publishedAt ? new Date(publishedAt).toLocaleDateString() : '';
       return {
         title: title || 'Untitled',

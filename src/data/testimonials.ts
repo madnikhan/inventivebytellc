@@ -8,6 +8,8 @@ export interface Testimonial {
   avatar?: string;
   rating?: number;
   type: 'client' | 'project';
+  /** When true, show Google Review badge for authenticity */
+  isGoogleReview?: boolean;
 }
 
 export const testimonials: Testimonial[] = [

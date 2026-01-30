@@ -2,14 +2,16 @@
 
 import { useMemo } from "react";
 import TestimonialCard from "./TestimonialCard";
+import GoogleReviewTrustBadge from "./GoogleReviewTrustBadge";
 import { useTestimonials } from "@/hooks/useTestimonials";
 
 interface TestimonialsSectionProps {
   limit?: number;
   filter?: 'all' | 'client' | 'project';
+  showTrustBadge?: boolean;
 }
 
-export default function TestimonialsSection({ limit, filter = 'all' }: TestimonialsSectionProps) {
+export default function TestimonialsSection({ limit, filter = 'all', showTrustBadge = false }: TestimonialsSectionProps) {
   const { testimonials, loading } = useTestimonials();
   
   const filteredTestimonials = useMemo(() => {
@@ -28,7 +30,13 @@ export default function TestimonialsSection({ limit, filter = 'all' }: Testimoni
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="space-y-6">
+      {showTrustBadge && (
+        <div className="flex justify-center">
+          <GoogleReviewTrustBadge variant="compact" />
+        </div>
+      )}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {filteredTestimonials.map((testimonial, index) => (
         <TestimonialCard
           key={testimonial.id}
@@ -36,6 +44,7 @@ export default function TestimonialsSection({ limit, filter = 'all' }: Testimoni
           index={index}
         />
       ))}
+      </div>
     </div>
   );
 }

@@ -31,6 +31,7 @@ export async function GET() {
           rating: t.rating,
           type: t.type,
           projectId: t.project?._ref,
+          isGoogleReview: t.isGoogleReview ?? false,
         };
       });
       return NextResponse.json({ testimonials: convertedTestimonials, source: 'sanity' });

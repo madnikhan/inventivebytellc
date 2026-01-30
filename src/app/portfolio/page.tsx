@@ -4,15 +4,11 @@ import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Search, Filter, X } from "lucide-react";
 import PortfolioCard from "@/components/portfolio/PortfolioCard";
-import ProjectModal from "@/components/portfolio/ProjectModal";
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import { PortfolioProject } from "@/data/portfolio";
 import { usePortfolio } from "@/hooks/usePortfolio";
 
 export default function PortfolioPage() {
   const { projects: portfolioProjects, loading } = usePortfolio();
-  const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedTech, setSelectedTech] = useState<string>("all");
@@ -56,11 +52,6 @@ export default function PortfolioPage() {
     });
   }, [searchQuery, selectedCategory, selectedTech, portfolioProjects]);
 
-  const handleProjectClick = (project: PortfolioProject) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
-  };
-
   const featuredProjects = portfolioProjects.filter((p) => p.featured);
 
   return (
@@ -85,12 +76,7 @@ export default function PortfolioPage() {
           <h2 className="text-3xl font-bold text-white mb-8">Featured Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredProjects.map((project, index) => (
-              <PortfolioCard
-                key={project.id}
-                project={project}
-                onClick={() => handleProjectClick(project)}
-                index={index}
-              />
+              <PortfolioCard key={project.id} project={project} index={index} />
             ))}
           </div>
         </AnimatedSection>
@@ -193,12 +179,7 @@ export default function PortfolioPage() {
         ) : filteredProjects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {filteredProjects.map((project, index) => (
-              <PortfolioCard
-                key={project.id}
-                project={project}
-                onClick={() => handleProjectClick(project)}
-                index={index}
-              />
+              <PortfolioCard key={project.id} project={project} index={index} />
             ))}
           </div>
         ) : (
@@ -242,13 +223,6 @@ export default function PortfolioPage() {
           </div>
         </div>
       </AnimatedSection>
-
-      {/* Project Modal */}
-      <ProjectModal
-        project={selectedProject}
-        open={isModalOpen}
-        onOpenChange={setIsModalOpen}
-      />
     </main>
   );
 }

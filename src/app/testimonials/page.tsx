@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "@/components/testimonials/TestimonialCard";
+import GoogleReviewTrustBadge from "@/components/testimonials/GoogleReviewTrustBadge";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useTestimonials } from "@/hooks/useTestimonials";
 
@@ -52,6 +53,13 @@ export default function TestimonialsPage() {
                 : "Project Reviews"}
             </button>
           ))}
+        </div>
+      </AnimatedSection>
+
+      {/* Google Review Trust Badge */}
+      <AnimatedSection delay={0.25} className="mb-10">
+        <div className="max-w-4xl mx-auto">
+          <GoogleReviewTrustBadge variant="full" />
         </div>
       </AnimatedSection>
 

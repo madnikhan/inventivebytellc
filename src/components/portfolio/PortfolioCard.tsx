@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { ExternalLink, Github, Calendar } from "lucide-react";
 import Image from "next/image";
 import TechStackBadge from "./TechStackBadge";
@@ -8,20 +9,19 @@ import { PortfolioProject } from "@/data/portfolio";
 
 interface PortfolioCardProps {
   project: PortfolioProject;
-  onClick?: () => void;
   index?: number;
 }
 
-export default function PortfolioCard({ project, onClick, index = 0 }: PortfolioCardProps) {
+export default function PortfolioCard({ project, index = 0 }: PortfolioCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] border border-white/10 hover:border-[#00D9FF]/50 transition-all duration-300 cursor-pointer"
-      onClick={onClick}
-    >
+    <Link href={`/portfolio/${project.id}`}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.1 }}
+        whileHover={{ y: -8, scale: 1.02 }}
+        className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] border border-white/10 hover:border-[#00D9FF]/50 transition-all duration-300 cursor-pointer"
+      >
       {/* Image/Thumbnail */}
       <div className="relative h-48 overflow-hidden">
         {project.images && project.images.length > 0 ? (
@@ -119,5 +119,6 @@ export default function PortfolioCard({ project, onClick, index = 0 }: Portfolio
         <div className="absolute inset-0 bg-gradient-to-r from-[#00D9FF]/10 via-transparent to-[#B026FF]/10 blur-xl" />
       </div>
     </motion.div>
+    </Link>
   );
 }

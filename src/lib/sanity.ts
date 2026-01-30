@@ -49,6 +49,7 @@ export interface SanityTestimonial {
     _ref: string;
     _type: 'reference';
   };
+  isGoogleReview?: boolean;
 }
 
 // Lazy Sanity client creation - only create if projectId is configured
@@ -173,6 +174,7 @@ export const testimonialsQuery = `*[_type == "testimonial"] | order(_createdAt d
   },
   rating,
   type,
+  isGoogleReview,
   project->{
     _id,
     title,

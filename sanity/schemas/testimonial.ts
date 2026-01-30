@@ -61,6 +61,13 @@ export default {
       to: [{ type: 'portfolio' }],
       description: 'Link this testimonial to a portfolio project (optional)',
     },
+    {
+      name: 'isGoogleReview',
+      title: 'From Google Reviews',
+      type: 'boolean',
+      description: 'Check if this testimonial was copied from a Google review (shows Google badge for authenticity)',
+      initialValue: false,
+    },
   ],
   preview: {
     select: {
@@ -68,12 +75,13 @@ export default {
       role: 'role',
       company: 'company',
       type: 'type',
+      isGoogleReview: 'isGoogleReview',
       media: 'avatar',
     },
-    prepare({ author, role, company, type, media }: any) {
+    prepare({ author, role, company, type, isGoogleReview, media }: any) {
       return {
         title: author,
-        subtitle: `${role}${company ? ` at ${company}` : ''} • ${type || 'client'}`,
+        subtitle: `${role}${company ? ` at ${company}` : ''} • ${type || 'client'}${isGoogleReview ? ' • Google' : ''}`,
         media,
       };
     },

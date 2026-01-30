@@ -7,12 +7,10 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import PortfolioCard from "@/components/portfolio/PortfolioCard";
 import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 import GradientButton from "@/components/ui/GradientButton";
-import { useRouter } from "next/navigation";
 import { Code, Users, Rocket, Award } from "lucide-react";
 import { usePortfolio } from "@/hooks/usePortfolio";
 
 export default function Home() {
-  const router = useRouter();
   const { projects: portfolioProjects, loading: portfolioLoading } = usePortfolio();
   const featuredProjects = portfolioProjects.filter((p) => p.featured).slice(0, 3);
   const featuredTestimonials = 3;
@@ -38,7 +36,7 @@ export default function Home() {
       <AnimatedSection className="py-20 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { icon: Code, value: portfolioProjects.length, label: "Projects Completed" },
+            { icon: Code, value: "150+", label: "Projects Completed" },
             { icon: Users, value: "50+", label: "Happy Clients" },
             { icon: Rocket, value: "10+", label: "Brands Launched" },
             { icon: Award, value: "100%", label: "Client Satisfaction" },
@@ -79,12 +77,7 @@ export default function Home() {
           ) : featuredProjects.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               {featuredProjects.map((project, index) => (
-                <PortfolioCard
-                  key={project.id}
-                  project={project}
-                  onClick={() => router.push(`/portfolio#${project.id}`)}
-                  index={index}
-                />
+                <PortfolioCard key={project.id} project={project} index={index} />
               ))}
             </div>
           ) : (
@@ -120,7 +113,7 @@ export default function Home() {
             </p>
           </div>
 
-          <TestimonialsSection limit={featuredTestimonials} />
+          <TestimonialsSection limit={featuredTestimonials} showTrustBadge />
 
           <div className="text-center mt-12">
             <Link href="/testimonials">

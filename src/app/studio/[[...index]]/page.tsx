@@ -1,11 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 
 export default function StudioPage() {
-  const router = useRouter()
-  
   useEffect(() => {
     // Redirect to deployed Sanity Studio
     // Replace with your actual Sanity Studio URL after running: npm run sanity:deploy

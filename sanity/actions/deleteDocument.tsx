@@ -16,7 +16,7 @@ const API_VERSION = '2024-01-01';
  */
 export function DeleteDocumentAction(
   props: DocumentActionProps
-): DocumentActionDescription | undefined {
+): DocumentActionDescription | null {
   const { id, onComplete } = props;
   const [dialogOpen, setDialogOpen] = useState(false);
   const client = useClient({ apiVersion: API_VERSION });

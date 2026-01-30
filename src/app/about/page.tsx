@@ -2,13 +2,17 @@
 
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import GradientButton from "@/components/ui/GradientButton";
 import Link from "next/link";
 import { Rocket, Target, MapPin, Code, Users, Award } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen pt-20 pb-20 px-6">
+    <div className="min-h-screen pt-20 pb-20 px-6">
+      <AnimatedSection className="max-w-4xl mx-auto mb-8">
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "About" }]} />
+      </AnimatedSection>
       {/* Hero Section */}
       <AnimatedSection className="text-center mb-20">
         <motion.h1
@@ -155,6 +159,6 @@ export default function AboutPage() {
           </div>
         </div>
       </AnimatedSection>
-    </main>
+    </div>
   );
 }

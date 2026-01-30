@@ -6,6 +6,7 @@ import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
 import GradientButton from "../../components/ui/GradientButton";
 import AnimatedSection from "../../components/ui/AnimatedSection";
+import Breadcrumbs from "../../components/ui/Breadcrumbs";
 import { Mail, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { trackConversion } from "@/lib/google-ads";
 
@@ -52,7 +53,10 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="min-h-screen pt-20 pb-20 px-6">
+    <div className="min-h-screen pt-20 pb-20 px-6">
+      <AnimatedSection className="max-w-6xl mx-auto mb-6">
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Contact" }]} />
+      </AnimatedSection>
       {/* Hero Section */}
       <AnimatedSection className="text-center mb-16">
         <motion.h1
@@ -232,6 +236,6 @@ export default function ContactPage() {
           </motion.div>
         </AnimatedSection>
       </div>
-    </main>
+    </div>
   );
 }

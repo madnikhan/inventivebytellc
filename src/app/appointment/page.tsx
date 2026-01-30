@@ -112,7 +112,7 @@ export default function AppointmentPage() {
   };
 
   return (
-    <main className="min-h-screen pt-20 pb-20 px-6">
+    <div className="min-h-screen pt-20 pb-20 px-6">
       <AnimatedSection className="text-center mb-16">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -304,6 +304,6 @@ export default function AppointmentPage() {
           </AnimatedSection>
         </div>
       )}
-    </main>
+    </div>
   );
 }

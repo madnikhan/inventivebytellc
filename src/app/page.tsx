@@ -16,7 +16,7 @@ export default function Home() {
   const featuredTestimonials = 3;
 
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen">
       {/* Hero Section */}
       <HeroSection
         title="InventiveByte LLC"
@@ -159,6 +159,6 @@ export default function Home() {
           </div>
         </motion.div>
       </AnimatedSection>
-    </main>
+    </div>
   );
 }

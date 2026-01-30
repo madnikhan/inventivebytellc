@@ -18,18 +18,18 @@ export default function PortfolioProjectPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen pt-20 pb-20 px-6">
+      <div className="min-h-screen pt-20 pb-20 px-6">
         <div className="max-w-4xl mx-auto flex flex-col items-center justify-center py-32">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#00D9FF]" />
           <p className="text-gray-400 mt-4">Loading project...</p>
         </div>
-      </main>
+      </div>
     );
   }
 
   if (!project) {
     return (
-      <main className="min-h-screen pt-20 pb-20 px-6">
+      <div className="min-h-screen pt-20 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center py-32">
           <h1 className="text-3xl font-bold text-white mb-4">Project not found</h1>
           <p className="text-gray-400 mb-8">
@@ -43,22 +43,21 @@ export default function PortfolioProjectPage() {
             Back to Portfolio
           </Link>
         </div>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="min-h-screen pt-20 pb-20 px-6">
+    <div className="min-h-screen pt-20 pb-20 px-6">
       <div className="max-w-4xl mx-auto">
-        {/* Back link */}
         <AnimatedSection className="mb-8">
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-[#00D9FF] transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Portfolio
-          </Link>
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Portfolio", href: "/portfolio" },
+              { label: project.title },
+            ]}
+          />
         </AnimatedSection>
 
         {/* Title & description (markdown from Sanity Short or Long description) */}
@@ -82,6 +81,6 @@ export default function PortfolioProjectPage() {
           <ProjectDetailContent project={project} />
         </AnimatedSection>
       </div>
-    </main>
+    </div>
   );
 }

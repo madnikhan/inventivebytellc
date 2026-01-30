@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Search, Filter, X } from "lucide-react";
 import PortfolioCard from "@/components/portfolio/PortfolioCard";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { usePortfolio } from "@/hooks/usePortfolio";
 
 export default function PortfolioPage() {
@@ -55,7 +56,10 @@ export default function PortfolioPage() {
   const featuredProjects = portfolioProjects.filter((p) => p.featured);
 
   return (
-    <main className="min-h-screen pt-20 pb-20 px-6">
+    <div className="min-h-screen pt-20 pb-20 px-6">
+      <AnimatedSection className="max-w-7xl mx-auto mb-6">
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Portfolio" }]} />
+      </AnimatedSection>
       {/* Hero Section */}
       <AnimatedSection className="text-center mb-16">
         <motion.h1
@@ -223,6 +227,6 @@ export default function PortfolioPage() {
           </div>
         </div>
       </AnimatedSection>
-    </main>
+    </div>
   );
 }

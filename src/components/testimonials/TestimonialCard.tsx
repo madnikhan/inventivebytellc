@@ -76,7 +76,7 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
 
       {/* Quote */}
       <p className="text-gray-300 leading-relaxed mb-6 relative z-10">
-        &ldquo;{testimonial.quote}&rdquo;
+        &ldquo;{testimonial.quote ?? ""}&rdquo;
       </p>
 
       {/* Author Info */}
@@ -84,20 +84,20 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
         {testimonial.avatar ? (
           <Image
             src={testimonial.avatar}
-            alt={testimonial.author}
+            alt={testimonial.author ?? "Author"}
             width={48}
             height={48}
             className="rounded-full border-2 border-[#00D9FF]/50"
           />
         ) : (
           <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00D9FF] to-[#B026FF] flex items-center justify-center text-white font-bold text-lg">
-            {testimonial.author.charAt(0)}
+            {(testimonial.author ?? "?").charAt(0)}
           </div>
         )}
         <div className="flex-1">
-          <div className="font-semibold text-white">{testimonial.author}</div>
+          <div className="font-semibold text-white">{testimonial.author ?? "Anonymous"}</div>
           <div className="text-sm text-gray-400">
-            {testimonial.role}
+            {testimonial.role ?? ""}
             {testimonial.company && ` at ${testimonial.company}`}
           </div>
           {testimonial.projectId && (

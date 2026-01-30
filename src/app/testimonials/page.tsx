@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import TestimonialCard from "@/components/testimonials/TestimonialCard";
 import GoogleReviewTrustBadge from "@/components/testimonials/GoogleReviewTrustBadge";
@@ -18,7 +19,7 @@ export default function TestimonialsPage() {
   }, [testimonials, filter]);
 
   return (
-    <main className="min-h-screen pt-20 pb-20 px-6">
+    <div className="min-h-screen pt-20 pb-20 px-6">
       {/* Hero Section */}
       <AnimatedSection className="text-center mb-16">
         <motion.h1
@@ -28,9 +29,15 @@ export default function TestimonialsPage() {
         >
           Testimonials
         </motion.h1>
-        <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
+        <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-6">
           What our clients and partners say about our work
         </p>
+        <Link
+          href="/testimonials/submit"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-white/10 text-gray-200 hover:bg-[#00D9FF]/20 hover:text-[#00D9FF] border border-white/10 hover:border-[#00D9FF]/40 transition-all"
+        >
+          Submit a review
+        </Link>
       </AnimatedSection>
 
       {/* Filter Tabs */}
@@ -125,6 +132,6 @@ export default function TestimonialsPage() {
           </motion.div>
         </div>
       </AnimatedSection>
-    </main>
+    </div>
   );
 }

@@ -17,6 +17,46 @@ const geistMono = Geist_Mono({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.inventivebytellc.com";
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "InventiveByte LLC",
+      url: siteUrl,
+      logo: { "@type": "ImageObject", url: `${siteUrl}/inventivebyte-logo.png` },
+      description: "InventiveByte LLC builds, launches, and scales SaaS platforms and digital brands from Montana, USA.",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "1001 S. Main St. STE 600",
+        addressLocality: "Kalispell",
+        addressRegion: "MT",
+        postalCode: "59901",
+        addressCountry: "US",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        email: "info@inventivebytellc.com",
+        contactType: "customer service",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "InventiveByte LLC",
+      description: "SaaS & Digital Brands from Montana, USA.",
+      publisher: { "@id": `${siteUrl}/#organization` },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: { "@type": "EntryPoint", urlTemplate: `${siteUrl}/contact?q={search_term_string}` },
+        "query-input": "required name=search_term_string",
+      },
+    },
+  ],
+};
+
 export const metadata: Metadata = {
   title: "InventiveByte LLC | SaaS & Digital Brands from Montana",
   description:
@@ -63,9 +103,19 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <a
+          href="#main-content"
+          className="skip-to-content"
+        >
+          Skip to main content
+        </a>
         <GoogleAdsConversion />
         <Navbar />
-        {children}
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>

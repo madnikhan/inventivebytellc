@@ -126,7 +126,7 @@ export default function QuotePage() {
   };
 
   return (
-    <main className="min-h-screen pt-20 pb-20 px-6">
+    <div className="min-h-screen pt-20 pb-20 px-6">
       <AnimatedSection className="text-center mb-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -319,6 +319,6 @@ export default function QuotePage() {
           </div>
         </AnimatedSection>
       )}
-    </main>
+    </div>
   );
 }

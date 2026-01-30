@@ -35,6 +35,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/services" className="hover:text-[#00D9FF] transition-colors">
+                  Services
+                </Link>
+              </li>
+              <li>
                 <Link href="/portfolio" className="hover:text-[#00D9FF] transition-colors">
                   Portfolio
                 </Link>
@@ -42,6 +47,21 @@ export default function Footer() {
               <li>
                 <Link href="/testimonials" className="hover:text-[#00D9FF] transition-colors">
                   Testimonials
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials/submit" className="hover:text-[#00D9FF] transition-colors">
+                  Submit a Review
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="hover:text-[#00D9FF] transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/resources" className="hover:text-[#00D9FF] transition-colors">
+                  Resources
                 </Link>
               </li>
             </ul>

@@ -45,7 +45,7 @@ const brands = [
 
 export default function BrandsPage() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen text-black px-10 py-20 space-y-10">
+    <div className="flex flex-col items-center justify-center min-h-screen text-black px-10 py-20 space-y-10">
       <h1 className="text-5xl md:text-7xl font-extrabold text-center mb-8 tracking-tight">Our Brands & Projects</h1>
       <section className="max-w-2xl text-center text-xl md:text-2xl leading-relaxed mb-8">
         <p>
@@ -89,6 +89,6 @@ export default function BrandsPage() {
           </Link>
         </motion.div>
       </motion.div>
-    </main>
+    </div>
   );
 } 

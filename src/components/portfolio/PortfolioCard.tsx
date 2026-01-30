@@ -14,14 +14,14 @@ interface PortfolioCardProps {
 
 export default function PortfolioCard({ project, index = 0 }: PortfolioCardProps) {
   return (
-    <Link href={`/portfolio/${project.id}`}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: index * 0.1 }}
-        whileHover={{ y: -8, scale: 1.02 }}
-        className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] border border-white/10 hover:border-[#00D9FF]/50 transition-all duration-300 cursor-pointer"
-      >
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1 }}
+      whileHover={{ y: -8, scale: 1.02 }}
+      className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] border border-white/10 hover:border-[#00D9FF]/50 transition-all duration-300 cursor-pointer"
+    >
+      <Link href={`/portfolio/${project.id}`} className="block">
       {/* Image/Thumbnail */}
       <div className="relative h-48 overflow-hidden">
         {project.images && project.images.length > 0 ? (
@@ -62,35 +62,9 @@ export default function PortfolioCard({ project, index = 0 }: PortfolioCardProps
       {/* Content */}
       <div className="p-6">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl font-bold text-white group-hover:text-[#00D9FF] transition-colors">
+          <h3 className="text-xl font-bold text-white group-hover:text-[#00D9FF] transition-colors pr-12">
             {project.title}
           </h3>
-          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-            {project.websiteLink && (
-              <a
-                href={project.websiteLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="p-1.5 rounded-lg bg-white/10 hover:bg-[#00D9FF]/20 text-white transition-colors"
-                aria-label="Visit website"
-              >
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            )}
-            {project.githubLink && (
-              <a
-                href={project.githubLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="p-1.5 rounded-lg bg-white/10 hover:bg-[#00D9FF]/20 text-white transition-colors"
-                aria-label="View on GitHub"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-            )}
-          </div>
         </div>
 
         <p className="text-gray-400 text-sm mb-4 line-clamp-2">{project.description}</p>
@@ -118,7 +92,35 @@ export default function PortfolioCard({ project, index = 0 }: PortfolioCardProps
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-r from-[#00D9FF]/10 via-transparent to-[#B026FF]/10 blur-xl" />
       </div>
+      </Link>
+
+      {/* External links - outside Link to avoid nested <a> */}
+      {(project.websiteLink || project.githubLink) && (
+        <div className="absolute top-[13.25rem] right-6 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+          {project.websiteLink && (
+            <a
+              href={project.websiteLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-white/10 hover:bg-[#00D9FF]/20 text-white transition-colors"
+              aria-label="Visit website"
+            >
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          )}
+          {project.githubLink && (
+            <a
+              href={project.githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-white/10 hover:bg-[#00D9FF]/20 text-white transition-colors"
+              aria-label="View on GitHub"
+            >
+              <Github className="w-4 h-4" />
+            </a>
+          )}
+        </div>
+      )}
     </motion.div>
-    </Link>
   );
 }

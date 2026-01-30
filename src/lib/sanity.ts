@@ -239,6 +239,38 @@ export async function getTestimonials(): Promise<SanityTestimonial[]> {
   }
 }
 
+/** Payload for creating a testimonial (e.g. from public submit form) */
+export interface CreateTestimonialPayload {
+  quote: string;
+  author: string;
+  role: string;
+  company?: string;
+  rating?: number;
+  type: 'client' | 'project';
+}
+
+/** Create a testimonial document in Sanity. Requires SANITY_API_TOKEN. */
+export async function createTestimonial(payload: CreateTestimonialPayload): Promise<{ _id: string }> {
+  const client = getSanityClient();
+  if (!client) {
+    throw new Error('Sanity client not configured');
+  }
+  if (!process.env.SANITY_API_TOKEN) {
+    throw new Error('SANITY_API_TOKEN required for creating testimonials');
+  }
+  const doc = await client.create({
+    _type: 'testimonial',
+    quote: payload.quote.trim(),
+    author: payload.author.trim(),
+    role: payload.role.trim(),
+    ...(payload.company?.trim() && { company: payload.company.trim() }),
+    ...(payload.rating != null && payload.rating >= 1 && payload.rating <= 5 && { rating: Math.floor(payload.rating) }),
+    type: payload.type === 'project' ? 'project' : 'client',
+    isGoogleReview: false,
+  });
+  return { _id: doc._id };
+}
+
 // Build a single image URL from Sanity image object (reference or dereferenced asset)
 function getImageUrl(
   img: NonNullable<SanityPortfolioProject['images']>[number] | undefined

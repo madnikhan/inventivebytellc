@@ -18,6 +18,8 @@ export interface SanityPortfolioProject {
     alt?: string;
   }>;
   video?: string;
+  /** URL of uploaded video file (from GROQ: videoFile.asset->url) */
+  videoFileUrl?: string;
   websiteLink?: string;
   githubLink?: string;
   techStack?: string[];
@@ -105,6 +107,7 @@ export const portfolioQuery = `*[_type == "portfolio"] | order(date desc) {
     alt
   },
   video,
+  "videoFileUrl": videoFile.asset->url,
   websiteLink,
   githubLink,
   techStack,
@@ -126,6 +129,7 @@ export const featuredPortfolioQuery = `*[_type == "portfolio" && featured == tru
     alt
   },
   video,
+  "videoFileUrl": videoFile.asset->url,
   websiteLink,
   githubLink,
   techStack,
@@ -147,6 +151,7 @@ export const portfolioBySlugQuery = `*[_type == "portfolio" && slug.current == $
     alt
   },
   video,
+  "videoFileUrl": videoFile.asset->url,
   websiteLink,
   githubLink,
   techStack,
@@ -260,6 +265,7 @@ export function convertSanityPortfolioToApp(sanityProject: SanityPortfolioProjec
   longDescription?: string;
   images: string[];
   video?: string;
+  videoFileUrl?: string;
   websiteLink?: string;
   githubLink?: string;
   techStack: string[];
@@ -267,6 +273,7 @@ export function convertSanityPortfolioToApp(sanityProject: SanityPortfolioProjec
   date: string;
   featured: boolean;
 } {
+  const videoFileUrl = sanityProject.videoFileUrl?.trim();
   return {
     id: sanityProject.slug?.current || sanityProject._id,
     title: sanityProject.title,
@@ -274,6 +281,7 @@ export function convertSanityPortfolioToApp(sanityProject: SanityPortfolioProjec
     longDescription: sanityProject.longDescription,
     images: (sanityProject.images ?? []).map(getImageUrl).filter(Boolean),
     video: sanityProject.video ? String(sanityProject.video).trim() : undefined,
+    videoFileUrl: videoFileUrl || undefined,
     websiteLink: sanityProject.websiteLink,
     githubLink: sanityProject.githubLink,
     techStack: sanityProject.techStack || [],

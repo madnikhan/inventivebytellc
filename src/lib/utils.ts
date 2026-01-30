@@ -11,15 +11,32 @@ export function normalizeVideoUrl(url: string | undefined): string | undefined {
   const trimmed = url.trim();
   if (!trimmed) return undefined;
 
+  // Ensure protocol for URLs that look like YouTube but lack it
+  let input = trimmed;
+  if (/^youtube\.com|^youtu\.be|^www\.youtube/.test(trimmed) && !/^https?:\/\//i.test(trimmed)) {
+    input = `https://${trimmed.replace(/^\/+/, "")}`;
+  }
+
   // YouTube: normalize to watch URL (react-player supports all, but watch is most reliable)
   const ytMatch =
-    trimmed.match(/^(?:https?:\/\/)?(?:www\.|m\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/) ||
-    trimmed.match(/^(?:https?:\/\/)?youtu\.be\/([a-zA-Z0-9_-]{11})/) ||
-    trimmed.match(/^(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/) ||
-    trimmed.match(/^(?:https?:\/\/)?(?:www\.)?youtube\.com\/v\/([a-zA-Z0-9_-]{11})/);
+    input.match(/^(?:https?:\/\/)?(?:www\.|m\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/) ||
+    input.match(/^(?:https?:\/\/)?youtu\.be\/([a-zA-Z0-9_-]{11})/) ||
+    input.match(/^(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/) ||
+    input.match(/^(?:https?:\/\/)?(?:www\.)?youtube\.com\/v\/([a-zA-Z0-9_-]{11})/);
   if (ytMatch) {
     return `https://www.youtube.com/watch?v=${ytMatch[1]}`;
   }
 
-  return trimmed;
+  return input;
+}
+
+/** True if URL is a direct video file (e.g. Sanity CDN, .mp4, .webm). Use native <video> for these. */
+export function isDirectVideoUrl(url: string | undefined): boolean {
+  if (!url || typeof url !== "string") return false;
+  const u = url.trim().toLowerCase();
+  return (
+    u.includes("cdn.sanity.io/files") ||
+    /\.(mp4|webm|ogg|mov)(\?|$)/i.test(u) ||
+    u.startsWith("blob:")
+  );
 }

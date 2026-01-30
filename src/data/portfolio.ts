@@ -5,6 +5,8 @@ export interface PortfolioProject {
   longDescription?: string;
   images: string[];
   video?: string;
+  /** URL of uploaded video file (Sanity), used when YouTube/link does not work */
+  videoFileUrl?: string;
   websiteLink?: string;
   githubLink?: string;
   techStack: string[];

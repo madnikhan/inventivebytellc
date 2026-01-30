@@ -54,7 +54,16 @@ export default {
       name: 'video',
       title: 'Video URL',
       type: 'url',
-      description: 'URL to video demo (YouTube, Vimeo, or direct link)',
+      description: 'URL to video demo (YouTube, Vimeo, or direct link). Use this or upload a video file below.',
+    },
+    {
+      name: 'videoFile',
+      title: 'Upload Video',
+      type: 'file',
+      options: {
+        accept: 'video/*',
+      },
+      description: 'Upload a video file if the YouTube/link option does not work (MP4, WebM, etc.).',
     },
     {
       name: 'websiteLink',

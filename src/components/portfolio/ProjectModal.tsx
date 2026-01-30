@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ExternalLink, Github, Calendar, Play } from "lucide-react";
-import { normalizeVideoUrl } from "@/lib/utils";
+import { normalizeVideoUrl, isDirectVideoUrl } from "@/lib/utils";
 import ImageGallery from "./ImageGallery";
 import TechStackBadge from "./TechStackBadge";
 import { PortfolioProject } from "@/data/portfolio";
@@ -34,7 +34,12 @@ interface ProjectModalProps {
 
 export default function ProjectModal({ project, open, onOpenChange }: ProjectModalProps) {
   const [showVideo, setShowVideo] = useState(false);
-  const videoUrl = useMemo(() => normalizeVideoUrl(project?.video), [project?.video]);
+  // Prefer YouTube/link URL; fall back to uploaded video file when link doesn't work or is empty
+  const videoUrl = useMemo(() => {
+    const linkUrl = normalizeVideoUrl(project?.video);
+    if (linkUrl) return linkUrl;
+    return project?.videoFileUrl?.trim() || undefined;
+  }, [project?.video, project?.videoFileUrl]);
 
   if (!project) return null;
 
@@ -55,13 +60,26 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
           <div className="relative">
             {videoUrl && (showVideo || (project.images?.length ?? 0) === 0) ? (
               <div className="relative w-full h-[400px] rounded-xl overflow-hidden bg-black">
-                <ReactPlayer
-                  url={videoUrl}
-                  width="100%"
-                  height="100%"
-                  controls
-                  playing={false}
-                />
+                {isDirectVideoUrl(videoUrl) ? (
+                  <video
+                    key={videoUrl}
+                    src={videoUrl}
+                    controls
+                    playsInline
+                    className="w-full h-full object-contain"
+                    preload="auto"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <ReactPlayer
+                    url={videoUrl}
+                    width="100%"
+                    height="100%"
+                    controls
+                    playing={false}
+                  />
+                )}
                 {(project.images?.length ?? 0) > 0 && (
                   <button
                     onClick={() => setShowVideo(false)}

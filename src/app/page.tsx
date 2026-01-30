@@ -32,6 +32,15 @@ export default function Home() {
         }}
       />
 
+      {/* At a glance — clear summary for users and AI/search */}
+      <AnimatedSection className="px-6 pb-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+            InventiveByte LLC is a Montana-based company that builds and scales SaaS platforms, web and mobile apps, recruitment tools, and digital products. We work with startups and enterprises worldwide. Our services include SaaS development, e-commerce and marketplaces, analytics and dashboards, HR and recruitment tools, and product consulting — from Kalispell, USA.
+          </p>
+        </div>
+      </AnimatedSection>
+
       {/* Stats Section */}
       <AnimatedSection className="py-20 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">

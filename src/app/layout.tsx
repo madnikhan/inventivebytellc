@@ -26,7 +26,7 @@ const jsonLd = {
       name: "InventiveByte LLC",
       url: siteUrl,
       logo: { "@type": "ImageObject", url: `${siteUrl}/inventivebyte-logo.png` },
-      description: "InventiveByte LLC builds, launches, and scales SaaS platforms and digital brands from Montana, USA.",
+      description: "InventiveByte LLC builds, launches, and scales SaaS platforms and digital brands from Montana, USA. Services include SaaS development, web and mobile apps, analytics and dashboards, e-commerce and marketplaces, recruitment and HR tools, and consulting. Based in Kalispell, Montana; works with startups and enterprises worldwide.",
       address: {
         "@type": "PostalAddress",
         streetAddress: "1001 S. Main St. STE 600",
@@ -53,6 +53,42 @@ const jsonLd = {
         target: { "@type": "EntryPoint", urlTemplate: `${siteUrl}/contact?q={search_term_string}` },
         "query-input": "required name=search_term_string",
       },
+    },
+    {
+      "@type": "Service",
+      "name": "SaaS Development",
+      "description": "End-to-end SaaS platforms: authentication, billing, dashboards, and scalable infrastructure.",
+      "provider": { "@id": `${siteUrl}/#organization` },
+    },
+    {
+      "@type": "Service",
+      "name": "Web & Mobile Apps",
+      "description": "Responsive web apps and native or cross-platform mobile apps built with modern stacks.",
+      "provider": { "@id": `${siteUrl}/#organization` },
+    },
+    {
+      "@type": "Service",
+      "name": "Analytics & Dashboards",
+      "description": "Real-time data visualization, custom reports, and business intelligence tools.",
+      "provider": { "@id": `${siteUrl}/#organization` },
+    },
+    {
+      "@type": "Service",
+      "name": "E-Commerce & Marketplaces",
+      "description": "Online stores and marketplaces with payments, inventory, and buyer/seller experience.",
+      "provider": { "@id": `${siteUrl}/#organization` },
+    },
+    {
+      "@type": "Service",
+      "name": "Recruitment & HR Tools",
+      "description": "Applicant tracking, candidate pipelines, and HR platforms for hiring and people operations.",
+      "provider": { "@id": `${siteUrl}/#organization` },
+    },
+    {
+      "@type": "Service",
+      "name": "Consulting & Strategy",
+      "description": "Technical audits, product strategy, and roadmap planning to align build with business goals.",
+      "provider": { "@id": `${siteUrl}/#organization` },
     },
   ],
 };

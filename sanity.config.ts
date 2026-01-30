@@ -11,7 +11,22 @@ export default defineConfig({
   dataset: 'production',
   basePath: '/studio',
   plugins: [
-    structureTool(),
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title('Content')
+          .items([
+            S.listItem()
+              .title('Resources / Blog')
+              .child(S.documentTypeList('resource').title('Resources')),
+            S.listItem()
+              .title('Portfolio')
+              .child(S.documentTypeList('portfolio').title('Portfolio')),
+            S.listItem()
+              .title('Testimonials')
+              .child(S.documentTypeList('testimonial').title('Testimonials')),
+          ]),
+    }),
     visionTool(),
   ],
   schema: {

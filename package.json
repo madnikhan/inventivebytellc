@@ -9,7 +9,8 @@
     "lint": "next lint",
     "sanity:dev": "sanity dev",
     "sanity:deploy": "sanity deploy",
-    "sanity:import": "tsx scripts/import-portfolio.ts"
+    "sanity:import": "tsx scripts/import-portfolio.ts",
+    "sanity:import-resources": "tsx scripts/import-resources.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.14",

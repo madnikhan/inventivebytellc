@@ -101,10 +101,7 @@ export const portfolioQuery = `*[_type == "portfolio"] | order(date desc) {
   longDescription,
   images[]{
     _type,
-    asset->{
-      _ref,
-      _type
-    },
+    asset,
     alt
   },
   video,
@@ -125,10 +122,7 @@ export const featuredPortfolioQuery = `*[_type == "portfolio" && featured == tru
   longDescription,
   images[]{
     _type,
-    asset->{
-      _ref,
-      _type
-    },
+    asset,
     alt
   },
   video,
@@ -149,10 +143,7 @@ export const portfolioBySlugQuery = `*[_type == "portfolio" && slug.current == $
   longDescription,
   images[]{
     _type,
-    asset->{
-      _ref,
-      _type
-    },
+    asset,
     alt
   },
   video,
@@ -173,10 +164,7 @@ export const testimonialsQuery = `*[_type == "testimonial"] | order(_createdAt d
   company,
   avatar{
     _type,
-    asset->{
-      _ref,
-      _type
-    }
+    asset
   },
   rating,
   type,
@@ -244,6 +232,26 @@ export async function getTestimonials(): Promise<SanityTestimonial[]> {
   }
 }
 
+// Build a single image URL from Sanity image object (reference or dereferenced asset)
+function getImageUrl(
+  img: NonNullable<SanityPortfolioProject['images']>[number] | undefined
+): string {
+  if (!img || typeof img !== 'object') return '';
+  const asset = (img as { asset?: { _ref?: string; _id?: string; url?: string } }).asset;
+  if (asset && typeof (asset as { url?: string }).url === 'string')
+    return (asset as { url: string }).url;
+  try {
+    if (asset) {
+      const ref = (asset as { _ref?: string })._ref || (asset as { _id?: string })._id;
+      if (ref) return getImageBuilder().image(ref).width(1200).height(800).url();
+    }
+    // Fallback: pass full image object (Sanity image-url accepts it)
+    return urlFor(img as SanityImageSource).width(1200).height(800).url();
+  } catch {
+    return '';
+  }
+}
+
 // Convert Sanity portfolio to app format
 export function convertSanityPortfolioToApp(sanityProject: SanityPortfolioProject): {
   id: string;
@@ -264,15 +272,8 @@ export function convertSanityPortfolioToApp(sanityProject: SanityPortfolioProjec
     title: sanityProject.title,
     description: sanityProject.description,
     longDescription: sanityProject.longDescription,
-    images: sanityProject.images?.map((img) => {
-      try {
-        return urlFor(img).width(1200).height(800).url();
-      } catch {
-        // Fallback if image URL builder fails
-        return '';
-      }
-    }).filter(Boolean) || [],
-    video: sanityProject.video,
+    images: (sanityProject.images ?? []).map(getImageUrl).filter(Boolean),
+    video: sanityProject.video ? String(sanityProject.video).trim() : undefined,
     websiteLink: sanityProject.websiteLink,
     githubLink: sanityProject.githubLink,
     techStack: sanityProject.techStack || [],

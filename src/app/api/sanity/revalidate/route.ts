@@ -16,10 +16,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const body = await req.json();
-    const { _type } = body;
+    const body = await req.json().catch(() => ({}));
+    const _type = body?._type ?? body?.type;
 
-    // Revalidate relevant pages based on content type
+    // Revalidate relevant pages based on content type (Sanity sends _type in webhook payload)
     if (_type === 'portfolio') {
       revalidatePath('/portfolio');
       revalidatePath('/');
@@ -28,6 +28,10 @@ export async function POST(req: NextRequest) {
       revalidatePath('/testimonials');
       revalidatePath('/');
       revalidateTag('testimonials');
+    } else if (_type) {
+      // Unknown type: revalidate portfolio and home so any content change is reflected
+      revalidatePath('/portfolio');
+      revalidatePath('/');
     }
 
     // Also trigger Vercel deployment via their API if needed

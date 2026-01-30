@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: 'ahit08r2',
     dataset: 'production',
   },
+  studioHost: 'inventivebytellc',
 });

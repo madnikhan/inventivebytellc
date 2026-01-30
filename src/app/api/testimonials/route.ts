@@ -3,7 +3,7 @@ import { getTestimonials, urlFor } from '@/lib/sanity';
 import { testimonials } from '@/data/testimonials';
 
 export const runtime = 'nodejs';
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 10; // Match portfolio: Sanity edits show quickly
 
 export async function GET() {
   try {

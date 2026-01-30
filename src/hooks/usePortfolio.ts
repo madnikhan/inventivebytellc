@@ -11,7 +11,7 @@ export function usePortfolio() {
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const response = await fetch('/api/portfolio');
+        const response = await fetch('/api/portfolio', { cache: 'no-store' });
         const data = await response.json();
         setProjects(data.projects);
         setSource(data.source);

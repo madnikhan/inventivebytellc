@@ -3,7 +3,7 @@ import { getPortfolioProjects, convertSanityPortfolioToApp } from '@/lib/sanity'
 import { portfolioProjects } from '@/data/portfolio';
 
 export const runtime = 'nodejs';
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 0; // Always fetch fresh from Sanity so CMS updates show immediately
 
 export async function GET() {
   try {
@@ -11,16 +11,37 @@ export async function GET() {
     const sanityProjects = await getPortfolioProjects();
     
     if (sanityProjects.length > 0) {
-      // Convert Sanity format to app format
       const convertedProjects = sanityProjects.map(convertSanityPortfolioToApp);
-      return NextResponse.json({ projects: convertedProjects, source: 'sanity' });
+      return NextResponse.json(
+        { projects: convertedProjects, source: 'sanity' },
+        {
+          headers: {
+            'Cache-Control': 'no-store, max-age=0',
+            'X-Portfolio-Source': 'sanity',
+          },
+        }
+      );
     }
-    
-    // Fallback to static data if Sanity is not configured or returns no data
-    return NextResponse.json({ projects: portfolioProjects, source: 'static' });
+
+    return NextResponse.json(
+      { projects: portfolioProjects, source: 'static' },
+      {
+        headers: {
+          'Cache-Control': 'no-store, max-age=0',
+          'X-Portfolio-Source': 'static',
+        },
+      }
+    );
   } catch (error) {
     console.error('Error fetching portfolio:', error);
-    // Fallback to static data on error
-    return NextResponse.json({ projects: portfolioProjects, source: 'static' });
+    return NextResponse.json(
+      { projects: portfolioProjects, source: 'static' },
+      {
+        headers: {
+          'Cache-Control': 'no-store, max-age=0',
+          'X-Portfolio-Source': 'static',
+        },
+      }
+    );
   }
 }

@@ -51,9 +51,9 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
         </DialogHeader>
 
         <div className="space-y-6">
-          {/* Media Section */}
+          {/* Media Section: show video when toggled OR when no images; otherwise show gallery */}
           <div className="relative">
-            {videoUrl && showVideo ? (
+            {videoUrl && (showVideo || (project.images?.length ?? 0) === 0) ? (
               <div className="relative w-full h-[400px] rounded-xl overflow-hidden bg-black">
                 <ReactPlayer
                   url={videoUrl}
@@ -62,12 +62,14 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
                   controls
                   playing={false}
                 />
-                <button
-                  onClick={() => setShowVideo(false)}
-                  className="absolute top-4 right-4 px-4 py-2 rounded-lg bg-black/70 backdrop-blur-sm text-white hover:bg-black/90 transition-colors"
-                >
-                  Show Images
-                </button>
+                {(project.images?.length ?? 0) > 0 && (
+                  <button
+                    onClick={() => setShowVideo(false)}
+                    className="absolute top-4 right-4 px-4 py-2 rounded-lg bg-black/70 backdrop-blur-sm text-white hover:bg-black/90 transition-colors"
+                  >
+                    Show Images
+                  </button>
+                )}
               </div>
             ) : (
               <>
@@ -80,7 +82,7 @@ export default function ProjectModal({ project, open, onOpenChange }: ProjectMod
                     Watch Video
                   </button>
                 )}
-                <ImageGallery images={project.images} title={project.title} />
+                <ImageGallery images={project.images ?? []} title={project.title} />
               </>
             )}
           </div>

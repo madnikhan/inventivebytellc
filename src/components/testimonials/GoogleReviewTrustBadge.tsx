@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const GOOGLE_REVIEW_URL =
   process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL ||
-  "https://g.page/r/your-business/review";
+  "https://share.google/kP4BOI28IFSh6aLfr";
 
 function GoogleIcon({ className }: { className?: string }) {
   return (

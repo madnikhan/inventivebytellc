@@ -46,8 +46,8 @@ export default function MarkdownContent({ content, className = "" }: MarkdownCon
           li: ({ children }) => <li className={markdownClasses.li}>{children}</li>,
           strong: ({ children }) => <strong className={markdownClasses.strong}>{children}</strong>,
           em: ({ children }) => <em className={markdownClasses.em}>{children}</em>,
-          code: ({ className: _, ...props }) => (
-            <code className={markdownClasses.code} {...props} />
+          code: (props) => (
+            <code {...props} className={markdownClasses.code} />
           ),
           pre: ({ children }) => <pre className={markdownClasses.pre}>{children}</pre>,
           a: ({ href, children }) => (

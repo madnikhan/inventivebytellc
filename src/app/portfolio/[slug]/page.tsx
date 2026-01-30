@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import MarkdownContent from "@/components/ui/MarkdownContent";
 import ProjectDetailContent from "@/components/portfolio/ProjectDetailContent";
 import { usePortfolio } from "@/hooks/usePortfolio";

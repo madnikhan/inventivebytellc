@@ -109,65 +109,47 @@ export default function PortfolioPage() {
             )}
           </div>
 
-          {/* Filters */}
-          <div className="flex flex-wrap gap-4">
+          {/* Filters - dropdowns to keep UI compact */}
+          <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-2">
-              <Filter className="w-5 h-5 text-gray-400" />
-              <span className="text-gray-400 font-medium">Filters:</span>
+              <Filter className="w-5 h-5 text-gray-400 shrink-0" aria-hidden />
+              <span className="text-gray-400 font-medium shrink-0">Filters:</span>
             </div>
 
-            {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setSelectedCategory("all")}
-                className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                  selectedCategory === "all"
-                    ? "bg-gradient-to-r from-[#00D9FF] to-[#0066FF] text-black"
-                    : "bg-white/10 text-gray-400 hover:bg-white/20"
-                }`}
+            {/* Category dropdown */}
+            <div className="flex items-center gap-2">
+              <label htmlFor="category-filter" className="sr-only">Category</label>
+              <select
+                id="category-filter"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="px-4 py-2.5 rounded-lg bg-[#0f0f1a] border border-white/10 text-white font-medium focus:outline-none focus:border-[#00D9FF]/50 transition-colors cursor-pointer min-w-[180px]"
               >
-                All Categories
-              </button>
-              {allCategories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                    selectedCategory === category
-                      ? "bg-gradient-to-r from-[#00D9FF] to-[#0066FF] text-black"
-                      : "bg-white/10 text-gray-400 hover:bg-white/20"
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
+                <option value="all">All Categories</option>
+                {allCategories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
             </div>
 
-            {/* Tech Stack Filter */}
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setSelectedTech("all")}
-                className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                  selectedTech === "all"
-                    ? "bg-gradient-to-r from-[#B026FF] to-[#FF0066] text-white"
-                    : "bg-white/10 text-gray-400 hover:bg-white/20"
-                }`}
+            {/* Tech stack dropdown */}
+            <div className="flex items-center gap-2">
+              <label htmlFor="tech-filter" className="sr-only">Technology</label>
+              <select
+                id="tech-filter"
+                value={selectedTech}
+                onChange={(e) => setSelectedTech(e.target.value)}
+                className="px-4 py-2.5 rounded-lg bg-[#0f0f1a] border border-white/10 text-white font-medium focus:outline-none focus:border-[#B026FF]/50 transition-colors cursor-pointer min-w-[180px]"
               >
-                All Tech
-              </button>
-              {allTechStacks.slice(0, 8).map((tech) => (
-                <button
-                  key={tech}
-                  onClick={() => setSelectedTech(tech)}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                    selectedTech === tech
-                      ? "bg-gradient-to-r from-[#B026FF] to-[#FF0066] text-white"
-                      : "bg-white/10 text-gray-400 hover:bg-white/20"
-                  }`}
-                >
-                  {tech}
-                </button>
-              ))}
+                <option value="all">All Tech</option>
+                {allTechStacks.map((tech) => (
+                  <option key={tech} value={tech}>
+                    {tech}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
         </div>

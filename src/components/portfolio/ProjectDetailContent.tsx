@@ -78,6 +78,15 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
         </section>
       )}
 
+      {/* Short description (below gallery + video) */}
+      {project.description && (
+        <section>
+          <div className="text-gray-400 [&_.prose]:text-gray-400">
+            <MarkdownContent content={project.description} />
+          </div>
+        </section>
+      )}
+
       {/* Long Description (Markdown from Sanity) */}
       {project.longDescription && (
         <section>

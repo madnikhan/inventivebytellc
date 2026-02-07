@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
-import MarkdownContent from "@/components/ui/MarkdownContent";
 import ProjectDetailContent from "@/components/portfolio/ProjectDetailContent";
 import { usePortfolio } from "@/hooks/usePortfolio";
 
@@ -60,19 +59,14 @@ export default function PortfolioProjectPage() {
           />
         </AnimatedSection>
 
-        {/* Heading on top */}
+        {/* Heading on top only */}
         <AnimatedSection delay={0.05} className="mb-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
             {project.title}
           </h1>
-          {project.description && (
-            <div className="text-gray-400 [&_.prose]:text-gray-400">
-              <MarkdownContent content={project.description} />
-            </div>
-          )}
         </AnimatedSection>
 
-        {/* Gallery + video, then long description, tech, links */}
+        {/* Gallery + video, then short description, long description, tech, links */}
         <AnimatedSection delay={0.1}>
           <ProjectDetailContent project={project} />
         </AnimatedSection>

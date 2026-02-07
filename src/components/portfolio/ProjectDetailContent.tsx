@@ -78,16 +78,6 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
         </section>
       )}
 
-      {/* 2. Text content below: Title, description, long description, tech, links */}
-      <section>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">{project.title}</h1>
-        {project.description && (
-          <div className="text-gray-400 [&_.prose]:text-gray-400 mb-6">
-            <MarkdownContent content={project.description} />
-          </div>
-        )}
-      </section>
-
       {/* Long Description (Markdown from Sanity) */}
       {project.longDescription && (
         <section>

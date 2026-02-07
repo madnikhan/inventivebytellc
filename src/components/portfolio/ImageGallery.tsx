@@ -48,14 +48,14 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
         <>
           <button
             onClick={prevImage}
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-white hover:bg-black/70 transition-all z-10"
+            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white/90 hover:bg-white/20 hover:text-white transition-all z-10"
             aria-label="Previous image"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={nextImage}
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-white hover:bg-black/70 transition-all z-10"
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white/90 hover:bg-white/20 hover:text-white transition-all z-10"
             aria-label="Next image"
           >
             <ChevronRight className="w-5 h-5" />

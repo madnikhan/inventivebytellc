@@ -42,7 +42,9 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
           className={`px-2 py-1 rounded-full text-xs font-medium ${
             testimonial.type === "client"
               ? "bg-[#00D9FF]/20 text-[#00D9FF] border border-[#00D9FF]/30"
-              : "bg-[#B026FF]/20 text-[#B026FF] border border-[#B026FF]/30"
+              : testimonial.type === "project_volunteering"
+                ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                : "bg-[#B026FF]/20 text-[#B026FF] border border-[#B026FF]/30"
           }`}
         >
           {testimonial.type === "client"

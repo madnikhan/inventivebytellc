@@ -7,7 +7,7 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import PortfolioCard from "@/components/portfolio/PortfolioCard";
 import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 import GradientButton from "@/components/ui/GradientButton";
-import { Code, Users, Rocket, Award, MapPin } from "lucide-react";
+import { Code, Users, Rocket, Award } from "lucide-react";
 import { usePortfolio } from "@/hooks/usePortfolio";
 
 export default function Home() {
@@ -44,18 +44,6 @@ export default function Home() {
             </p>
             <p className="text-center text-lg md:text-xl text-gray-200 leading-relaxed mt-4">
               Our services include SaaS development, e-commerce and marketplaces, analytics and dashboards, HR and recruitment tools, and product consulting — from Kalispell, USA.
-            </p>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* UK service area — visible for Quality Score / local SEO */}
-      <AnimatedSection className="px-6 pb-12">
-        <div className="max-w-2xl mx-auto">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 p-5 md:p-6 rounded-2xl bg-[#0f0f1a]/80 border border-[#00D9FF]/20 shadow-lg shadow-[#00D9FF]/5">
-            <MapPin className="w-6 h-6 text-[#00D9FF] shrink-0" aria-hidden />
-            <p className="text-center sm:text-left text-base md:text-lg text-gray-200 leading-relaxed m-0">
-              We serve businesses across London, Birmingham, Coventry, Warwick, Leamington Spa & Kenilworth. Meetings are online-first, with on-site visits available when required.
             </p>
           </div>
         </div>

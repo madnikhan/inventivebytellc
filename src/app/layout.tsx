@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import LayoutWrapper from "../components/LayoutWrapper";
 import GoogleAdsConversion from "../components/analytics/GoogleAdsConversion";
 
 const geistSans = Geist({
@@ -154,9 +153,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <GoogleAdsConversion />
-        <Navbar />
-        <main id="main-content">{children}</main>
-        <Footer />
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );

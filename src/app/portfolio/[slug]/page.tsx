@@ -2,11 +2,9 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
-import MarkdownContent from "@/components/ui/MarkdownContent";
 import ProjectDetailContent from "@/components/portfolio/ProjectDetailContent";
 import { usePortfolio } from "@/hooks/usePortfolio";
 
@@ -61,24 +59,8 @@ export default function PortfolioProjectPage() {
           />
         </AnimatedSection>
 
-        {/* Title & description (markdown from Sanity Short or Long description) */}
-        <AnimatedSection delay={0.1} className="mb-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold mb-4 gradient-text"
-          >
-            {project.title}
-          </motion.h1>
-          {project.description && (
-            <div className="text-gray-400 [&_.prose]:text-gray-400">
-              <MarkdownContent content={project.description} />
-            </div>
-          )}
-        </AnimatedSection>
-
-        {/* Full project detail content */}
-        <AnimatedSection delay={0.2}>
+        {/* Gallery + video first, then text content (title, description, etc.) */}
+        <AnimatedSection delay={0.1}>
           <ProjectDetailContent project={project} />
         </AnimatedSection>
       </div>

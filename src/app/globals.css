@@ -206,6 +206,32 @@ body {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+/* Hero section: CSS-only fade-in for LCP/performance (no JS) */
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hero-fade-in {
+  animation: hero-fade-in 0.6s ease-out forwards;
+}
+.hero-fade-in-delay-1 { animation-delay: 0.15s; opacity: 0; }
+.hero-fade-in-delay-2 { animation-delay: 0.35s; opacity: 0; }
+.hero-fade-in-delay-3 { animation-delay: 0.5s; opacity: 0; }
+.hero-fade-in-delay-4 { animation-delay: 0.65s; opacity: 0; }
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+.animate-scroll-bounce {
+  animation: scroll-bounce 1.5s ease-in-out infinite;
+}
+
 /* Logo Gradient Styling */
 .logo-container {
   position: relative;

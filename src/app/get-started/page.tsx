@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import FormField from "@/components/forms/FormField";
 import FormSelect from "@/components/forms/FormSelect";
@@ -9,7 +10,23 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import { trackConversion } from "@/lib/google-ads";
 import { CheckCircle, AlertCircle, Download, Sparkles } from "lucide-react";
 
+const interestOptions = [
+  { value: "web-development", label: "Web Development" },
+  { value: "saas-platform", label: "SaaS Platform" },
+  { value: "mobile-app", label: "Mobile App" },
+  { value: "google-business-profiles", label: "Google Business Profile" },
+  { value: "seo", label: "SEO" },
+  { value: "google-local-services-ads", label: "Google Local Services Ads" },
+  { value: "web-design", label: "Web Design" },
+  { value: "consultation", label: "Free Consultation" },
+  { value: "partnership", label: "Partnership Opportunity" },
+  { value: "other", label: "Other" },
+];
+
 export default function GetStartedPage() {
+  const searchParams = useSearchParams();
+  const serviceParam = searchParams.get("service");
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,14 +38,11 @@ export default function GetStartedPage() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
-  const interestOptions = [
-    { value: "web-development", label: "Web Development" },
-    { value: "saas-platform", label: "SaaS Platform" },
-    { value: "mobile-app", label: "Mobile App" },
-    { value: "consultation", label: "Free Consultation" },
-    { value: "partnership", label: "Partnership Opportunity" },
-    { value: "other", label: "Other" },
-  ];
+  useEffect(() => {
+    if (serviceParam && interestOptions.some((o) => o.value === serviceParam)) {
+      setFormData((prev) => (prev.interest ? prev : { ...prev, interest: serviceParam }));
+    }
+  }, [serviceParam]);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -106,7 +120,15 @@ export default function GetStartedPage() {
           Get Started
         </motion.h1>
         <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
-          Ready to bring your idea to life? Let&apos;s start the conversation and explore how we can help.
+          {serviceParam === "google-business-profiles"
+            ? "Get started with Google Business Profile management. Tell us about your business and we'll be in touch."
+            : serviceParam === "seo"
+              ? "Get started with SEO. Share your goals and we&apos;ll propose a plan that fits."
+              : serviceParam === "google-local-services-ads"
+                ? "Get started with Google Local Services Ads. We&apos;ll check eligibility and walk you through setup."
+                : serviceParam === "web-design"
+                  ? "Get started with web design. Tell us about your project and we&apos;ll send a tailored quote."
+                  : "Ready to bring your idea to life? Let&apos;s start the conversation and explore how we can help."}
         </p>
       </AnimatedSection>
 

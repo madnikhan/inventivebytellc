@@ -1,15 +1,29 @@
 "use client";
 
-import Link from 'next/link';
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "./ui/navigation-menu";
+import Link from "next/link";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+} from "./ui/navigation-menu";
 import { Sheet, SheetTrigger, SheetContent, SheetTitle } from "./ui/sheet";
 import { Button } from "./ui/button";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import { useState } from "react";
+
+const serviceSubmenu = [
+  { href: "/services", label: "All services" },
+  { href: "/services/google-business-profiles", label: "Google Business Profile" },
+  { href: "/services/seo", label: "SEO" },
+  { href: "/services/google-local-services-ads", label: "Google Local Services Ads" },
+  { href: "/services/web-design", label: "Web Design" },
+];
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/testimonials", label: "Testimonials" },
   { href: "/faq", label: "FAQ" },
@@ -20,6 +34,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   return (
     <nav className="sticky top-0 z-50 w-full glass-effect border-b border-white/10 shadow-lg font-sans">
       <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-4 py-5">
@@ -37,13 +52,42 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <div className="hidden md:flex flex-1 justify-center">
           <NavigationMenu>
-            <NavigationMenuList>
-              {navLinks.map((link) => (
+            <NavigationMenuList className="gap-1">
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/" className="relative px-5 py-2 text-lg font-semibold tracking-wide transition-colors duration-200 text-gray-300 hover:text-[#00D9FF] focus:text-[#00D9FF] group">
+                    <span className="transition-colors duration-200">Home</span>
+                    <span className="absolute left-1/2 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-[#00D9FF] to-[#B026FF] rounded-full transition-all duration-300 group-hover:w-3/4 group-hover:left-1/8 group-focus:w-3/4 group-focus:left-1/8" />
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="min-w-0 px-5 py-2 h-auto text-lg font-semibold tracking-wide text-gray-300 hover:text-[#00D9FF] hover:bg-transparent focus:text-[#00D9FF] focus:bg-transparent data-[state=open]:text-[#00D9FF] data-[state=open]:bg-transparent bg-transparent border-0 shadow-none [&>svg]:size-4">
+                  Services
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="left-0 right-0 mx-auto min-w-[220px] rounded-xl border border-white/10 bg-[#0f0f1a] py-2 shadow-xl">
+                  <ul className="grid gap-0.5 px-2">
+                    {serviceSubmenu.map((item) => (
+                      <li key={item.href}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            href={item.href}
+                            className="block rounded-lg px-3 py-2.5 text-sm font-medium text-gray-300 transition-colors hover:bg-white/10 hover:text-[#00D9FF] focus:bg-white/10 focus:text-[#00D9FF]"
+                          >
+                            {item.label}
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              {navLinks.slice(1).map((link) => (
                 <NavigationMenuItem key={link.href}>
                   <NavigationMenuLink asChild>
                     <Link href={link.href} className="relative px-5 py-2 text-lg font-semibold tracking-wide transition-colors duration-200 text-gray-300 hover:text-[#00D9FF] focus:text-[#00D9FF] group">
                       <span className="transition-colors duration-200">{link.label}</span>
-                      <span className="absolute left-1/2 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-[#00D9FF] to-[#B026FF] rounded-full transition-all duration-300 group-hover:w-3/4 group-hover:left-1/8 group-focus:w-3/4 group-focus:left-1/8"></span>
+                      <span className="absolute left-1/2 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-[#00D9FF] to-[#B026FF] rounded-full transition-all duration-300 group-hover:w-3/4 group-hover:left-1/8 group-focus:w-3/4 group-focus:left-1/8" />
                     </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
@@ -63,23 +107,66 @@ export default function Navbar() {
                 <Menu className="size-7" />
               </Button>
             </SheetTrigger>
-            <SheetContent className="flex items-center justify-center p-0 glass-effect rounded-2xl shadow-2xl border border-white/20 w-[90vw] max-w-xs h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed">
+            <SheetContent className="flex flex-col p-0 glass-effect border border-white/20 w-[90vw] max-w-xs h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed rounded-2xl shadow-2xl [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white [&>button]:focus:ring-[#00D9FF] [&>button]:right-4 [&>button]:top-4">
               <SheetTitle className="sr-only">Main Navigation</SheetTitle>
-              <button onClick={() => setOpen(false)} aria-label="Close menu" className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#00D9FF] text-white">
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
-              </button>
-              <nav className="flex flex-col items-center gap-6 w-full px-8 py-12">
-                {navLinks.map((link) => (
+              <div className="flex-1 min-h-0 overflow-y-auto">
+                <nav className="flex flex-col items-center gap-6 w-full px-8 py-12 pb-8">
                   <Link
-                    key={link.href}
-                    href={link.href}
+                    href="/"
                     className="text-2xl font-bold py-2 px-4 rounded-xl transition-colors text-white hover:text-[#00D9FF] hover:bg-white/10 focus:bg-white/20 w-full text-center"
                     onClick={() => setOpen(false)}
                   >
-                    {link.label}
+                    Home
                   </Link>
-                ))}
-              </nav>
+                  <div className="w-full">
+                    <button
+                      type="button"
+                      onClick={() => setServicesOpen((o) => !o)}
+                      className="flex items-center justify-center gap-2 w-full text-2xl font-bold py-2 px-4 rounded-xl transition-colors text-white hover:text-[#00D9FF] hover:bg-white/10 focus:bg-white/20"
+                      aria-expanded={servicesOpen}
+                      aria-controls="mobile-services-menu"
+                      id="mobile-services-trigger"
+                    >
+                      Services
+                      <ChevronDown
+                        className={`size-6 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
+                        aria-hidden
+                      />
+                    </button>
+                    <div
+                      id="mobile-services-menu"
+                      role="region"
+                      aria-labelledby="mobile-services-trigger"
+                      className={`grid transition-[grid-template-rows] duration-200 ease-out ${servicesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="flex flex-col gap-1 pt-2 pb-1">
+                          {serviceSubmenu.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              className="text-lg font-medium py-2 px-4 rounded-xl transition-colors text-gray-300 hover:text-[#00D9FF] hover:bg-white/10 w-full text-center"
+                              onClick={() => setOpen(false)}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {navLinks.slice(1).map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="text-2xl font-bold py-2 px-4 rounded-xl transition-colors text-white hover:text-[#00D9FF] hover:bg-white/10 focus:bg-white/20 w-full text-center"
+                      onClick={() => setOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
             </SheetContent>
           </Sheet>
         </div>

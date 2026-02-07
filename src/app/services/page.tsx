@@ -5,7 +5,22 @@ import Link from "next/link";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import GradientButton from "@/components/ui/GradientButton";
-import { Code, Globe, Users, BarChart3, ShoppingCart, MessageSquare } from "lucide-react";
+import {
+  Code,
+  Globe,
+  Users,
+  BarChart3,
+  ShoppingCart,
+  MessageSquare,
+  MapPin,
+  Megaphone,
+  Building2,
+  Search,
+  Layout,
+  FileSearch,
+  Wrench,
+  Sparkles,
+} from "lucide-react";
 
 const services = [
   {
@@ -44,6 +59,58 @@ const services = [
     description:
       "Technical audits, product strategy, and roadmap planning to align build with business goals.",
   },
+  {
+    icon: MapPin,
+    title: "Google Business Profile",
+    slug: "google-business-profiles",
+    description:
+      "Get found when people search locally. We optimise your profile so you stand out in local search and attract nearby customers.",
+  },
+  {
+    icon: Megaphone,
+    title: "Google Ads & PPC",
+    description:
+      "Paid search and display campaigns that bring in qualified traffic. We handle setup, targeting, and ongoing optimisation.",
+  },
+  {
+    icon: Building2,
+    title: "Google Local Services Ads",
+    slug: "google-local-services-ads",
+    description:
+      "Pay-per-lead, Google-verified ads for local service businesses. You pay when leads come in, so spend aligns with results.",
+  },
+  {
+    icon: Search,
+    title: "SEO",
+    slug: "seo",
+    description:
+      "Improve where you rank in search so more visitors find you. We focus on sustainable gains and clear, measurable outcomes.",
+  },
+  {
+    icon: Layout,
+    title: "Web Design",
+    slug: "web-design",
+    description:
+      "Sites that look sharp and work hard: fast, clear, and built to convert. From landing pages to full websites.",
+  },
+  {
+    icon: FileSearch,
+    title: "Website Audits",
+    description:
+      "A one-off health check of your site: what’s broken, slow, or holding you back, with a clear, actionable plan.",
+  },
+  {
+    icon: Wrench,
+    title: "Website Maintenance",
+    description:
+      "Ongoing care: hosting, security updates, content changes, and support so your site stays secure and up to date.",
+  },
+  {
+    icon: Sparkles,
+    title: "Other Marketing Services",
+    description:
+      "Brand, content, or campaigns tailored to your goals. We put together a plan that fits your budget and timeline.",
+  },
 ];
 
 export default function ServicesPage() {
@@ -68,7 +135,7 @@ export default function ServicesPage() {
           Our Services
         </motion.h1>
         <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-          From SaaS and web apps to recruitment tools and analytics — we build what scales.
+          From product development to digital marketing — we help businesses across London, Birmingham, Coventry and beyond grow online.
         </p>
       </AnimatedSection>
 
@@ -80,11 +147,17 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.08 }}
-              className="p-6 rounded-2xl bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] border border-white/10 hover:border-[#00D9FF]/40 transition-all"
+              className="p-6 rounded-2xl bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] border border-white/10 hover:border-[#00D9FF]/40 transition-all flex flex-col"
             >
               <service.icon className="w-10 h-10 text-[#00D9FF] mb-4" />
               <h2 className="text-xl font-bold text-white mb-2">{service.title}</h2>
-              <p className="text-gray-400 leading-relaxed">{service.description}</p>
+              <p className="text-gray-400 leading-relaxed flex-grow">{service.description}</p>
+              <Link
+                href={"slug" in service && service.slug ? `/services/${service.slug}` : "/quote"}
+                className="mt-4 inline-flex items-center text-sm font-medium text-[#00D9FF] hover:text-[#00D9FF]/80 transition-colors"
+              >
+                {"slug" in service && service.slug ? "Learn more →" : "Get in touch →"}
+              </Link>
             </motion.div>
           ))}
         </div>

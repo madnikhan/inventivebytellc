@@ -28,7 +28,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const validType = type === 'project' ? 'project' : 'client';
+    const validType =
+      type === 'project_volunteering' ? 'project_volunteering' : type === 'project' ? 'project' : 'client';
     const numRating =
       rating != null && typeof rating === 'number'
         ? Math.min(5, Math.max(1, Math.floor(rating)))

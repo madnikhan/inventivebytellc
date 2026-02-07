@@ -44,7 +44,7 @@ export interface SanityTestimonial {
     };
   };
   rating?: number;
-  type: 'client' | 'project';
+  type: 'client' | 'project' | 'project_volunteering';
   project?: {
     _ref: string;
     _type: 'reference';
@@ -308,7 +308,7 @@ export interface CreateTestimonialPayload {
   role: string;
   company?: string;
   rating?: number;
-  type: 'client' | 'project';
+  type: 'client' | 'project' | 'project_volunteering';
 }
 
 /** Create a testimonial document in Sanity. Requires SANITY_API_TOKEN. */
@@ -327,7 +327,7 @@ export async function createTestimonial(payload: CreateTestimonialPayload): Prom
     role: payload.role.trim(),
     ...(payload.company?.trim() && { company: payload.company.trim() }),
     ...(payload.rating != null && payload.rating >= 1 && payload.rating <= 5 && { rating: Math.floor(payload.rating) }),
-    type: payload.type === 'project' ? 'project' : 'client',
+    type: payload.type === 'client' ? 'client' : payload.type === 'project_volunteering' ? 'project_volunteering' : 'project',
     isGoogleReview: false,
   });
   return { _id: doc._id };

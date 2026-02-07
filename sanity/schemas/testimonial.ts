@@ -49,6 +49,7 @@ export default {
         list: [
           { title: 'Client', value: 'client' },
           { title: 'Project', value: 'project' },
+          { title: 'Project (Volunteering)', value: 'project_volunteering' },
         ],
         layout: 'radio',
       },
@@ -79,9 +80,10 @@ export default {
       media: 'avatar',
     },
     prepare({ author, role, company, type, isGoogleReview, media }: any) {
+      const typeLabel = type === 'project_volunteering' ? 'Project (Volunteering)' : type || 'client';
       return {
         title: author,
-        subtitle: `${role}${company ? ` at ${company}` : ''} • ${type || 'client'}${isGoogleReview ? ' • Google' : ''}`,
+        subtitle: `${role}${company ? ` at ${company}` : ''} • ${typeLabel}${isGoogleReview ? ' • Google' : ''}`,
         media,
       };
     },

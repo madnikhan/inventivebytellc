@@ -45,7 +45,11 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
               : "bg-[#B026FF]/20 text-[#B026FF] border border-[#B026FF]/30"
           }`}
         >
-          {testimonial.type === "client" ? "Client" : "Project"}
+          {testimonial.type === "client"
+            ? "Client"
+            : testimonial.type === "project_volunteering"
+              ? "Project (Volunteering)"
+              : "Project"}
         </span>
         {testimonial.isGoogleReview && (
           <span

@@ -15,8 +15,10 @@ export default function TestimonialsSection({ limit, filter = 'all', showTrustBa
   const { testimonials, loading } = useTestimonials();
   
   const filteredTestimonials = useMemo(() => {
-    return testimonials.filter((t) => 
-      filter === 'all' || t.type === filter
+    return testimonials.filter((t) =>
+      filter === "all" ||
+      t.type === filter ||
+      (filter === "project" && t.type === "project_volunteering")
     ).slice(0, limit);
   }, [testimonials, filter, limit]);
 

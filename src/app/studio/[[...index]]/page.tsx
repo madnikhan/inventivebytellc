@@ -1,20 +1,18 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react'
+import dynamic from 'next/dynamic';
+// Config lives at project root; schema (including "Project (Volunteering)") is loaded from there
+import config from '../../../../sanity.config';
+
+const Studio = dynamic(
+  () => import('sanity').then((mod) => ({ default: mod.Studio })),
+  { ssr: false }
+);
 
 export default function StudioPage() {
-  useEffect(() => {
-    // Redirect to deployed Sanity Studio
-    // Replace with your actual Sanity Studio URL after running: npm run sanity:deploy
-    window.location.href = 'https://inventivebytellc.sanity.studio'
-  }, [])
-  
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#0a0a0f]">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold text-white mb-4">Loading Sanity Studio...</h1>
-        <p className="text-gray-400">Redirecting to CMS...</p>
-      </div>
+    <div className="fixed inset-0 h-screen w-screen min-h-screen min-w-full overflow-auto [&_#app]:min-h-screen">
+      <Studio config={config} />
     </div>
-  )
+  );
 }

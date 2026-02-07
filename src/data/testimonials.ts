@@ -7,7 +7,7 @@ export interface Testimonial {
   projectId?: string;
   avatar?: string;
   rating?: number;
-  type: 'client' | 'project';
+  type: 'client' | 'project' | 'project_volunteering';
   /** When true, show Google Review badge for authenticity */
   isGoogleReview?: boolean;
 }

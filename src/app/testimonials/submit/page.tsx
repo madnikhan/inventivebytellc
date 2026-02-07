@@ -15,7 +15,7 @@ export default function SubmitTestimonialPage() {
   const [role, setRole] = useState("");
   const [company, setCompany] = useState("");
   const [rating, setRating] = useState<number | "">(5);
-  const [type, setType] = useState<"client" | "project">("client");
+  const [type, setType] = useState<"client" | "project" | "project_volunteering">("client");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
@@ -230,6 +230,18 @@ export default function SubmitTestimonialPage() {
                     disabled={loading}
                   />
                   <span className="text-gray-300">Project</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="type"
+                    value="project_volunteering"
+                    checked={type === "project_volunteering"}
+                    onChange={() => setType("project_volunteering")}
+                    className="accent-[#00D9FF]"
+                    disabled={loading}
+                  />
+                  <span className="text-gray-300">Project (Volunteering)</span>
                 </label>
               </div>
             </div>

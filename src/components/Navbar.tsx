@@ -62,17 +62,17 @@ export default function Navbar() {
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="min-w-0 px-5 py-2 h-auto text-lg font-semibold tracking-wide text-gray-300 hover:text-[#00D9FF] hover:bg-transparent focus:text-[#00D9FF] focus:bg-transparent data-[state=open]:text-[#00D9FF] data-[state=open]:bg-transparent bg-transparent border-0 shadow-none [&>svg]:size-4">
+                <NavigationMenuTrigger className="min-w-0 px-5 py-2.5 h-auto text-lg font-semibold tracking-wide text-gray-300 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md shadow-sm transition-all duration-200 hover:bg-white/10 hover:text-white hover:border-white/20 focus:bg-white/10 focus:text-white focus:border-white/20 data-[state=open]:bg-white/10 data-[state=open]:text-white data-[state=open]:border-white/20 [&>svg]:size-4">
                   Services
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="left-0 right-0 mx-auto min-w-[240px] rounded-2xl border border-white/15 bg-[#0f0f1a]/95 backdrop-blur-xl py-2 shadow-xl shadow-black/20 ring-1 ring-[#00D9FF]/10 mt-2">
+                <NavigationMenuContent className="left-0 right-0 mx-auto min-w-[240px] rounded-2xl glass-effect py-2 shadow-xl mt-2">
                   <ul className="grid gap-0.5 px-2 py-1">
                     {serviceSubmenu.map((item) => (
                       <li key={item.href}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={item.href}
-                            className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-200 transition-all duration-200 hover:bg-[#00D9FF]/10 hover:text-[#00D9FF] hover:border-l-2 hover:border-l-[#00D9FF] border-l-2 border-l-transparent focus:bg-[#00D9FF]/10 focus:text-[#00D9FF] focus:border-l-[#00D9FF]"
+                            className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-300 transition-all duration-200 hover:bg-white/10 hover:text-white border-l-2 border-l-transparent hover:border-l-white/30 focus:bg-white/10 focus:text-white focus:border-l-white/30"
                           >
                             {item.label}
                           </Link>

@@ -130,15 +130,18 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
       <div className="flex flex-col gap-4 pt-6 border-t border-white/10">
         <div className="flex flex-wrap gap-4">
           {project.websiteLink && (
-            <a
-              href={project.websiteLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-[#00D9FF] to-[#0066FF] text-black font-semibold hover:opacity-90 transition-opacity"
-            >
-              <ExternalLink className="w-4 h-4" />
-              Visit Website
-            </a>
+            <span className="inline-flex items-center gap-2 flex-wrap">
+              <a
+                href={project.websiteLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-[#00D9FF] to-[#0066FF] text-black font-semibold hover:opacity-90 transition-opacity"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Visit Website
+              </a>
+              <span className="text-sm text-gray-400">— Contact us to see the demo</span>
+            </span>
           )}
           {project.githubLink && (
             <a

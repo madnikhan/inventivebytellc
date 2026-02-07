@@ -55,9 +55,8 @@ export default function Navbar() {
             <NavigationMenuList className="gap-1">
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <Link href="/" className="relative px-5 py-2 text-lg font-semibold tracking-wide transition-colors duration-200 text-gray-300 hover:text-[#00D9FF] focus:text-[#00D9FF] group">
-                    <span className="transition-colors duration-200">Home</span>
-                    <span className="absolute left-1/2 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-[#00D9FF] to-[#B026FF] rounded-full transition-all duration-300 group-hover:w-3/4 group-hover:left-1/8 group-focus:w-3/4 group-focus:left-1/8" />
+                  <Link href="/" className="relative px-5 py-2.5 rounded-xl border border-transparent text-lg font-semibold tracking-wide transition-all duration-200 text-gray-300 hover:!bg-white/10 hover:backdrop-blur-sm hover:border-white/20 hover:!text-white focus:!bg-white/10 focus:backdrop-blur-sm focus:border-white/20 focus:!text-white">
+                    Home
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -72,7 +71,7 @@ export default function Navbar() {
                         <NavigationMenuLink asChild>
                           <Link
                             href={item.href}
-                            className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-300 transition-all duration-200 hover:bg-white/10 hover:text-white border-l-2 border-l-transparent hover:border-l-white/30 focus:bg-white/10 focus:text-white focus:border-l-white/30"
+                            className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-300 transition-all duration-200 hover:!bg-white/10 hover:!text-white border-l-2 border-l-transparent hover:border-l-white/30 focus:!bg-white/10 focus:!text-white focus:border-l-white/30"
                           >
                             {item.label}
                           </Link>
@@ -85,9 +84,8 @@ export default function Navbar() {
               {navLinks.slice(1).map((link) => (
                 <NavigationMenuItem key={link.href}>
                   <NavigationMenuLink asChild>
-                    <Link href={link.href} className="relative px-5 py-2 text-lg font-semibold tracking-wide transition-colors duration-200 text-gray-300 hover:text-[#00D9FF] focus:text-[#00D9FF] group">
-                      <span className="transition-colors duration-200">{link.label}</span>
-                      <span className="absolute left-1/2 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-[#00D9FF] to-[#B026FF] rounded-full transition-all duration-300 group-hover:w-3/4 group-hover:left-1/8 group-focus:w-3/4 group-focus:left-1/8" />
+                    <Link href={link.href} className="relative px-5 py-2.5 rounded-xl border border-transparent text-lg font-semibold tracking-wide transition-all duration-200 text-gray-300 hover:!bg-white/10 hover:backdrop-blur-sm hover:border-white/20 hover:!text-white focus:!bg-white/10 focus:backdrop-blur-sm focus:border-white/20 focus:!text-white">
+                      {link.label}
                     </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>

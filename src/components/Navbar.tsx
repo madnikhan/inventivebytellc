@@ -51,7 +51,7 @@ export default function Navbar() {
         </Link>
         {/* Desktop Nav */}
         <div className="hidden md:flex flex-1 justify-center">
-          <NavigationMenu>
+          <NavigationMenu className="[&_[data-slot=navigation-menu-viewport]]:!bg-transparent [&_[data-slot=navigation-menu-viewport]]:!border-0 [&_[data-slot=navigation-menu-viewport]]:!shadow-none">
             <NavigationMenuList className="gap-1">
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
@@ -65,14 +65,14 @@ export default function Navbar() {
                 <NavigationMenuTrigger className="min-w-0 px-5 py-2 h-auto text-lg font-semibold tracking-wide text-gray-300 hover:text-[#00D9FF] hover:bg-transparent focus:text-[#00D9FF] focus:bg-transparent data-[state=open]:text-[#00D9FF] data-[state=open]:bg-transparent bg-transparent border-0 shadow-none [&>svg]:size-4">
                   Services
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="left-0 right-0 mx-auto min-w-[220px] rounded-xl border border-white/10 bg-[#0f0f1a] py-2 shadow-xl">
-                  <ul className="grid gap-0.5 px-2">
+                <NavigationMenuContent className="left-0 right-0 mx-auto min-w-[240px] rounded-2xl border border-white/15 bg-[#0f0f1a]/95 backdrop-blur-xl py-2 shadow-xl shadow-black/20 ring-1 ring-[#00D9FF]/10 mt-2">
+                  <ul className="grid gap-0.5 px-2 py-1">
                     {serviceSubmenu.map((item) => (
                       <li key={item.href}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={item.href}
-                            className="block rounded-lg px-3 py-2.5 text-sm font-medium text-gray-300 transition-colors hover:bg-white/10 hover:text-[#00D9FF] focus:bg-white/10 focus:text-[#00D9FF]"
+                            className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-200 transition-all duration-200 hover:bg-[#00D9FF]/10 hover:text-[#00D9FF] hover:border-l-2 hover:border-l-[#00D9FF] border-l-2 border-l-transparent focus:bg-[#00D9FF]/10 focus:text-[#00D9FF] focus:border-l-[#00D9FF]"
                           >
                             {item.label}
                           </Link>

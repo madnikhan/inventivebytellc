@@ -13,7 +13,7 @@ interface BreadcrumbsProps {
   currentPageUrl?: string;
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.inventivebytellc.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inventivebytellc.com";
 
 export default function Breadcrumbs({ items, className = "", currentPageUrl }: BreadcrumbsProps) {
   const jsonLd = {

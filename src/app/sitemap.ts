@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
 import { getPortfolioProjects, getResources } from "@/lib/sanity";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.inventivebytellc.com";
+// Use same domain as Search Console property (https://inventivebytellc.com) to avoid redirect issues
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inventivebytellc.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [

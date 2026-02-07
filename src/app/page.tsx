@@ -21,7 +21,7 @@ export default function Home() {
       <HeroSection
         title="InventiveByte LLC"
         subtitle="Innovation Meets Excellence"
-        description="We launch, incubate, and scale innovative SaaS brands and digital products — building the future from Montana, USA."
+        description="We launch, incubate, and scale innovative SaaS brands and digital products — building the future from Montana, USA. We serve businesses across London, Birmingham, Coventry, Warwick, Leamington Spa & Kenilworth. Meetings are online-first, with on-site visits available when required."
         primaryCTA={{
           text: "Schedule Free Consultation",
           href: "/appointment",

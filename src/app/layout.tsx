@@ -96,6 +96,8 @@ const jsonLd = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  alternates: { canonical: "/" },
   title: "InventiveByte LLC | SaaS & Digital Brands from Montana",
   description:
     "InventiveByte LLC builds, launches, and scales SaaS platforms and digital brands from Montana, USA.",

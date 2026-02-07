@@ -23,9 +23,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "Professional web design: mobile-friendly, SEO-optimised sites that convert. From landing pages to full websites. Get started today.",
   };
   if (titles[slug]) {
-    return { title: titles[slug], description: descriptions[slug] ?? undefined };
+    return {
+      title: titles[slug],
+      description: descriptions[slug] ?? undefined,
+      alternates: { canonical: `/services/${slug}` },
+    };
   }
-  return { title: "Services | InventiveByte LLC" };
+  return { title: "Services | InventiveByte LLC", alternates: { canonical: `/services/${slug}` } };
 }
 
 export default function ServiceSlugLayout({

@@ -34,6 +34,7 @@ export async function generateMetadata({
     return {
       title: `${sanityPost.title} | InventiveByte LLC`,
       description: desc,
+      alternates: { canonical: `/resources/${slug}` },
     };
   }
 
@@ -42,10 +43,11 @@ export async function generateMetadata({
     return {
       title: `${staticPost.title} | InventiveByte LLC`,
       description: staticPost.content.slice(0, 160).replace(/\n/g, " ").trim() + "...",
+      alternates: { canonical: `/resources/${slug}` },
     };
   }
 
-  return { title: "Resource | InventiveByte LLC" };
+  return { title: "Resource | InventiveByte LLC", alternates: { canonical: `/resources/${slug}` } };
 }
 
 export default async function ResourcePage({

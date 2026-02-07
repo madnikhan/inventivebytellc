@@ -110,7 +110,7 @@ export default function AboutPage() {
       <AnimatedSection delay={0.6}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto mb-20">
           {[
-            { icon: Code, value: "10+", label: "Projects" },
+            { icon: Code, value: "150+", label: "Projects" },
             { icon: Users, value: "50+", label: "Clients" },
             { icon: Rocket, value: "5+", label: "Brands" },
             { icon: Award, value: "100%", label: "Satisfaction" },

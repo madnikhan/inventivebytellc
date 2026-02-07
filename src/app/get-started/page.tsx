@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import FormField from "@/components/forms/FormField";
@@ -23,7 +23,7 @@ const interestOptions = [
   { value: "other", label: "Other" },
 ];
 
-export default function GetStartedPage() {
+function GetStartedContent() {
   const searchParams = useSearchParams();
   const serviceParam = searchParams.get("service");
 
@@ -253,5 +253,19 @@ export default function GetStartedPage() {
         </AnimatedSection>
       )}
     </div>
+  );
+}
+
+export default function GetStartedPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen pt-20 pb-20 px-6 flex items-center justify-center">
+          <div className="animate-pulse text-gray-400">Loading...</div>
+        </div>
+      }
+    >
+      <GetStartedContent />
+    </Suspense>
   );
 }

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { motion } from "framer-motion";
 import { ArrowLeft, MapPin, CheckCircle, Search, Building2, Layout } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -41,11 +42,13 @@ export default function Navbar() {
         {/* Logo - your PNG, full brightness so it's visible on dark nav */}
         <Link href="/" className="flex items-center flex-shrink-0 mr-4 group" aria-label="InventiveByte Home">
           <span className="relative flex items-center justify-center rounded-lg overflow-hidden border border-white/15 bg-white/5 px-2 py-1.5 transition-all group-hover:border-[#00D9FF]/40 group-hover:shadow-[0_0_20px_rgba(0,217,255,0.15)]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/inventivebyte-logo.png"
               alt="InventiveByte LLC"
+              width={160}
+              height={44}
               className="h-11 w-auto object-contain drop-shadow-sm"
+              priority
             />
           </span>
         </Link>

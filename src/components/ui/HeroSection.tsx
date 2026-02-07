@@ -50,9 +50,9 @@ export default function HeroSection({
         )}
         
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0 }}
           className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight"
         >
           {typeof title === "string" ? (

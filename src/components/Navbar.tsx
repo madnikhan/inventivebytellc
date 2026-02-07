@@ -61,7 +61,7 @@ export default function Navbar() {
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="min-w-0 px-5 py-2.5 h-auto text-lg font-semibold tracking-wide text-gray-300 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md shadow-sm transition-all duration-200 hover:bg-white/10 hover:text-white hover:border-white/20 focus:bg-white/10 focus:text-white focus:border-white/20 data-[state=open]:bg-white/10 data-[state=open]:text-white data-[state=open]:border-white/20 [&>svg]:size-4">
+                <NavigationMenuTrigger className="min-w-0 px-5 py-2.5 h-auto text-lg font-semibold tracking-wide text-gray-300 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md shadow-sm transition-all duration-200 hover:!bg-white/10 hover:!text-white hover:border-white/20 focus:!bg-white/10 focus:!text-white focus:border-white/20 data-[state=open]:!bg-white/10 data-[state=open]:!text-white data-[state=open]:border-white/20 data-[state=open]:hover:!bg-white/10 [&>svg]:size-4">
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="left-0 right-0 mx-auto min-w-[240px] rounded-2xl glass-effect py-2 shadow-xl mt-2">

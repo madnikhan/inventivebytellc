@@ -26,36 +26,42 @@ const services = [
   {
     icon: Code,
     title: "SaaS Development",
+    slug: "saas-development",
     description:
       "End-to-end SaaS platforms: authentication, billing, dashboards, and scalable infrastructure so you can focus on growth.",
   },
   {
     icon: Globe,
     title: "Web & Mobile Apps",
+    slug: "web-mobile-apps",
     description:
       "Responsive web apps and native or cross-platform mobile apps built with modern stacks and best practices.",
   },
   {
     icon: BarChart3,
     title: "Analytics & Dashboards",
+    slug: "analytics-dashboards",
     description:
       "Real-time data visualization, custom reports, and business intelligence tools that drive decisions.",
   },
   {
     icon: ShoppingCart,
     title: "E-Commerce & Marketplaces",
+    slug: "ecommerce-marketplaces",
     description:
       "Online stores and marketplaces with payments, inventory, and a smooth buyer and seller experience.",
   },
   {
     icon: Users,
     title: "Recruitment & HR Tools",
+    slug: "recruitment-hr-tools",
     description:
       "Applicant tracking, candidate pipelines, and HR platforms that make hiring and people operations easier.",
   },
   {
     icon: MessageSquare,
     title: "Consulting & Strategy",
+    slug: "consulting-strategy",
     description:
       "Technical audits, product strategy, and roadmap planning to align build with business goals.",
   },
@@ -97,18 +103,21 @@ const services = [
   {
     icon: FileSearch,
     title: "Website Audits",
+    slug: "website-audits",
     description:
       "A one-off health check of your site: what’s broken, slow, or holding you back, with a clear, actionable plan.",
   },
   {
     icon: Wrench,
     title: "Website Maintenance",
+    slug: "website-maintenance",
     description:
       "Ongoing care: hosting, security updates, content changes, and support so your site stays secure and up to date.",
   },
   {
     icon: Sparkles,
     title: "Other Marketing Services",
+    slug: "other-marketing-services",
     description:
       "Brand, content, or campaigns tailored to your goals. We put together a plan that fits your budget and timeline.",
   },

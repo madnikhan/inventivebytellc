@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { ArrowLeft, MapPin, CheckCircle, Search, Building2, Layout, Megaphone } from "lucide-react";
+import { ArrowLeft, MapPin, CheckCircle, Search, Building2, Layout, Megaphone, FileSearch, Wrench, Sparkles, Lightbulb, Users, ShoppingCart, Layers, Smartphone, BarChart3 } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import GradientButton from "@/components/ui/GradientButton";
@@ -13,6 +13,15 @@ const SERVICE_SLUGS: Record<string, boolean> = {
   "google-local-services-ads": true,
   "web-design": true,
   "google-ads-ppc": true,
+  "website-audits": true,
+  "other-marketing-services": true,
+  "website-maintenance": true,
+  "consulting-strategy": true,
+  "recruitment-hr-tools": true,
+  "ecommerce-marketplaces": true,
+  "saas-development": true,
+  "web-mobile-apps": true,
+  "analytics-dashboards": true,
 };
 
 const SLUG_TO_TITLE: Record<string, string> = {
@@ -21,6 +30,15 @@ const SLUG_TO_TITLE: Record<string, string> = {
   "google-local-services-ads": "Google Local Services Ads",
   "web-design": "Web Design",
   "google-ads-ppc": "Google Ads & PPC",
+  "website-audits": "Website Audits",
+  "other-marketing-services": "Other Marketing Services",
+  "website-maintenance": "Website Maintenance",
+  "consulting-strategy": "Consulting & Strategy",
+  "recruitment-hr-tools": "Recruitment & HR Tools",
+  "ecommerce-marketplaces": "E-Commerce & Marketplaces",
+  "saas-development": "SaaS Development",
+  "web-mobile-apps": "Web & Mobile Apps",
+  "analytics-dashboards": "Analytics & Dashboards",
 };
 
 function GoogleBusinessProfileContent() {
@@ -486,6 +504,775 @@ function GoogleAdsPPCContent() {
   );
 }
 
+function WebsiteAuditsContent() {
+  return (
+    <>
+      <AnimatedSection className="mb-16">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 gradient-text">
+          Website Audits
+        </h1>
+        <p className="text-xl text-gray-400 max-w-3xl mb-8">
+          A one-off health check of your site: what&apos;s broken, slow, or holding you back, with a clear, actionable plan.
+        </p>
+        <Link href="/get-started?service=website-audits">
+          <GradientButton variant="primary" size="lg">
+            Get started
+          </GradientButton>
+        </Link>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Why an audit matters
+        </h2>
+        <p className="text-gray-400 leading-relaxed mb-8 max-w-3xl">
+          Hidden issues — slow load times, broken links, poor SEO, or security gaps — can cost you traffic and trust. A structured audit surfaces what&apos;s wrong and what to fix first, so you can prioritise and invest wisely.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            "Identify technical and SEO issues holding you back",
+            "Prioritised, actionable recommendations",
+            "Clear roadmap for improvements",
+            "Baseline for measuring future gains",
+            "Security and performance insights",
+            "Better user experience and conversions",
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-[#0f0f1a]/80 border border-white/10">
+              <CheckCircle className="w-5 h-5 text-[#00D9FF] shrink-0 mt-0.5" />
+              <span className="text-gray-300 text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+      <AnimatedSection delay={0.2} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          What we do for you
+        </h2>
+        <ul className="space-y-4 max-w-3xl">
+          {[
+            "Full-site review: speed, structure, SEO, and usability.",
+            "Technical checks: Core Web Vitals, crawlability, and errors.",
+            "Content and conversion path review.",
+            "Security and hosting considerations.",
+            "Written report with prioritised actions and next steps.",
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3 text-gray-400">
+              <span className="text-[#00D9FF] font-bold shrink-0">{(i + 1).toString()}.</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </AnimatedSection>
+      <AnimatedSection delay={0.3} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Who it&apos;s for
+        </h2>
+        <p className="text-gray-400 leading-relaxed max-w-3xl">
+          Anyone with an existing site who wants to know where they stand and what to fix first — from small businesses to larger teams. We deliver a clear, actionable plan so you can decide what to tackle in-house or with our help.
+        </p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.4}>
+        <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#00D9FF]/10 via-[#B026FF]/10 to-[#FF0066]/10 border border-[#00D9FF]/30 text-center">
+          <FileSearch className="w-12 h-12 text-[#00D9FF] mx-auto mb-4" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            Ready for a clear picture of your site?
+          </h2>
+          <p className="text-gray-400 mb-6 max-w-xl mx-auto">
+            Book an audit and we&apos;ll deliver a prioritised plan you can act on.
+          </p>
+          <Link href="/get-started?service=website-audits">
+            <GradientButton variant="primary" size="lg">
+              Get started
+            </GradientButton>
+          </Link>
+        </div>
+      </AnimatedSection>
+    </>
+  );
+}
+
+function OtherMarketingServicesContent() {
+  return (
+    <>
+      <AnimatedSection className="mb-16">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 gradient-text">
+          Other Marketing Services
+        </h1>
+        <p className="text-xl text-gray-400 max-w-3xl mb-8">
+          Brand, content, or campaigns tailored to your goals. We put together a plan that fits your budget and timeline.
+        </p>
+        <Link href="/get-started?service=other-marketing-services">
+          <GradientButton variant="primary" size="lg">
+            Get started
+          </GradientButton>
+        </Link>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Why it matters
+        </h2>
+        <p className="text-gray-400 leading-relaxed mb-8 max-w-3xl">
+          Marketing is more than a single channel. Whether you need brand clarity, content that converts, or campaigns across channels, a plan that fits your budget and timeline keeps you moving forward without overreaching.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            "Brand and messaging aligned with your audience",
+            "Content strategy and execution",
+            "Campaign planning across channels",
+            "Budget and timeline that work for you",
+            "Clear goals and measurable outcomes",
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-[#0f0f1a]/80 border border-white/10">
+              <CheckCircle className="w-5 h-5 text-[#00D9FF] shrink-0 mt-0.5" />
+              <span className="text-gray-300 text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+      <AnimatedSection delay={0.2} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          What we do for you
+        </h2>
+        <ul className="space-y-4 max-w-3xl">
+          {[
+            "Brand and positioning: clarity, voice, and visual direction.",
+            "Content: strategy, copy, and assets for web and campaigns.",
+            "Campaign planning: channels, messaging, and timelines.",
+            "Execution and optimisation within your budget.",
+            "Reporting and next-step recommendations.",
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3 text-gray-400">
+              <span className="text-[#00D9FF] font-bold shrink-0">{(i + 1).toString()}.</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </AnimatedSection>
+      <AnimatedSection delay={0.3} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Who it&apos;s for
+        </h2>
+        <p className="text-gray-400 leading-relaxed max-w-3xl">
+          Businesses that want marketing support beyond a single service — brand, content, or multi-channel campaigns — with a plan that fits their budget and timeline. We work with small and mid-size businesses across the UK.
+        </p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.4}>
+        <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#00D9FF]/10 via-[#B026FF]/10 to-[#FF0066]/10 border border-[#00D9FF]/30 text-center">
+          <Sparkles className="w-12 h-12 text-[#00D9FF] mx-auto mb-4" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            Ready to grow your marketing?
+          </h2>
+          <p className="text-gray-400 mb-6 max-w-xl mx-auto">
+            Tell us your goals and we&apos;ll propose a plan that fits your budget and timeline.
+          </p>
+          <Link href="/get-started?service=other-marketing-services">
+            <GradientButton variant="primary" size="lg">
+              Get started
+            </GradientButton>
+          </Link>
+        </div>
+      </AnimatedSection>
+    </>
+  );
+}
+
+function WebsiteMaintenanceContent() {
+  return (
+    <>
+      <AnimatedSection className="mb-16">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 gradient-text">
+          Website Maintenance
+        </h1>
+        <p className="text-xl text-gray-400 max-w-3xl mb-8">
+          Ongoing care: hosting, security updates, content changes, and support so your site stays secure and up to date.
+        </p>
+        <Link href="/get-started?service=website-maintenance">
+          <GradientButton variant="primary" size="lg">
+            Get started
+          </GradientButton>
+        </Link>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Why maintenance matters
+        </h2>
+        <p className="text-gray-400 leading-relaxed mb-8 max-w-3xl">
+          Sites that aren&apos;t updated can become slow, insecure, or broken. Regular maintenance keeps your site secure, fast, and aligned with your business — so you can focus on running it, not fixing it.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            "Security updates and patches",
+            "Reliable hosting and uptime",
+            "Content and copy updates when you need them",
+            "Backups and recovery options",
+            "Support when something goes wrong",
+            "Peace of mind so your site stays current",
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-[#0f0f1a]/80 border border-white/10">
+              <CheckCircle className="w-5 h-5 text-[#00D9FF] shrink-0 mt-0.5" />
+              <span className="text-gray-300 text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+      <AnimatedSection delay={0.2} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          What we do for you
+        </h2>
+        <ul className="space-y-4 max-w-3xl">
+          {[
+            "Hosting and environment management so your site stays online.",
+            "Security updates: core, plugins, and dependencies.",
+            "Content and copy changes within agreed scope.",
+            "Backups and restore support.",
+            "Monitoring and quick response when issues arise.",
+            "Reporting so you know your site is in good shape.",
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3 text-gray-400">
+              <span className="text-[#00D9FF] font-bold shrink-0">{(i + 1).toString()}.</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </AnimatedSection>
+      <AnimatedSection delay={0.3} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Who it&apos;s for
+        </h2>
+        <p className="text-gray-400 leading-relaxed max-w-3xl">
+          Businesses that want their site looked after without hiring in-house. We handle hosting, updates, and content changes so you can focus on your business. Flexible plans to match how often you need support.
+        </p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.4}>
+        <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#00D9FF]/10 via-[#B026FF]/10 to-[#FF0066]/10 border border-[#00D9FF]/30 text-center">
+          <Wrench className="w-12 h-12 text-[#00D9FF] mx-auto mb-4" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            Ready for hassle-free site care?
+          </h2>
+          <p className="text-gray-400 mb-6 max-w-xl mx-auto">
+            Tell us your site and needs — we&apos;ll propose a maintenance plan that fits.
+          </p>
+          <Link href="/get-started?service=website-maintenance">
+            <GradientButton variant="primary" size="lg">
+              Get started
+            </GradientButton>
+          </Link>
+        </div>
+      </AnimatedSection>
+    </>
+  );
+}
+
+function ConsultingStrategyContent() {
+  return (
+    <>
+      <AnimatedSection className="mb-16">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 gradient-text">
+          Consulting & Strategy
+        </h1>
+        <p className="text-xl text-gray-400 max-w-3xl mb-8">
+          Technical audits, product strategy, and roadmap planning to align build with business goals.
+        </p>
+        <Link href="/get-started?service=consulting-strategy">
+          <GradientButton variant="primary" size="lg">
+            Get started
+          </GradientButton>
+        </Link>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Why strategy matters
+        </h2>
+        <p className="text-gray-400 leading-relaxed mb-8 max-w-3xl">
+          Building without a clear plan can waste time and budget. Technical audits and product strategy help you prioritise, avoid pitfalls, and align what you build with what your business actually needs.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            "Technical audits to identify risks and opportunities",
+            "Product and feature roadmap aligned with goals",
+            "Clear priorities and sequencing",
+            "Alignment between build and business",
+            "Informed decisions before big investments",
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-[#0f0f1a]/80 border border-white/10">
+              <CheckCircle className="w-5 h-5 text-[#00D9FF] shrink-0 mt-0.5" />
+              <span className="text-gray-300 text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+      <AnimatedSection delay={0.2} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          What we do for you
+        </h2>
+        <ul className="space-y-4 max-w-3xl">
+          {[
+            "Technical audits: architecture, stack, security, and scalability.",
+            "Product strategy: goals, users, and feature prioritisation.",
+            "Roadmap planning: what to build, in what order, and why.",
+            "Vendor and build vs. buy guidance.",
+            "Ongoing advisory so decisions stay aligned with strategy.",
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3 text-gray-400">
+              <span className="text-[#00D9FF] font-bold shrink-0">{(i + 1).toString()}.</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </AnimatedSection>
+      <AnimatedSection delay={0.3} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Who it&apos;s for
+        </h2>
+        <p className="text-gray-400 leading-relaxed max-w-3xl">
+          Founders, product owners, and teams who want an outside view before committing to a build. We help you clarify goals, prioritise work, and plan a roadmap that fits your budget and timeline.
+        </p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.4}>
+        <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#00D9FF]/10 via-[#B026FF]/10 to-[#FF0066]/10 border border-[#00D9FF]/30 text-center">
+          <Lightbulb className="w-12 h-12 text-[#00D9FF] mx-auto mb-4" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            Ready to align build with strategy?
+          </h2>
+          <p className="text-gray-400 mb-6 max-w-xl mx-auto">
+            Share your goals and we&apos;ll propose an audit or strategy engagement.
+          </p>
+          <Link href="/get-started?service=consulting-strategy">
+            <GradientButton variant="primary" size="lg">
+              Get started
+            </GradientButton>
+          </Link>
+        </div>
+      </AnimatedSection>
+    </>
+  );
+}
+
+function RecruitmentHRToolsContent() {
+  return (
+    <>
+      <AnimatedSection className="mb-16">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 gradient-text">
+          Recruitment & HR Tools
+        </h1>
+        <p className="text-xl text-gray-400 max-w-3xl mb-8">
+          Applicant tracking, candidate pipelines, and HR platforms that make hiring and people operations easier.
+        </p>
+        <Link href="/get-started?service=recruitment-hr-tools">
+          <GradientButton variant="primary" size="lg">
+            Get started
+          </GradientButton>
+        </Link>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Why it matters
+        </h2>
+        <p className="text-gray-400 leading-relaxed mb-8 max-w-3xl">
+          Hiring and HR workflows are easier when you have the right tools. From applicant tracking to candidate pipelines and people operations, we build or integrate systems that scale with your team.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            "Applicant tracking and candidate pipelines",
+            "HR workflows and people operations",
+            "Integrations with job boards and tools",
+            "Reporting and compliance support",
+            "Scalable as your team grows",
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-[#0f0f1a]/80 border border-white/10">
+              <CheckCircle className="w-5 h-5 text-[#00D9FF] shrink-0 mt-0.5" />
+              <span className="text-gray-300 text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+      <AnimatedSection delay={0.2} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          What we do for you
+        </h2>
+        <ul className="space-y-4 max-w-3xl">
+          {[
+            "ATS and candidate pipeline design and build.",
+            "HR portals and self-service for staff.",
+            "Integrations with job boards, calendars, and comms.",
+            "Reporting, analytics, and compliance features.",
+            "Ongoing support and iteration as your needs evolve.",
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3 text-gray-400">
+              <span className="text-[#00D9FF] font-bold shrink-0">{(i + 1).toString()}.</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </AnimatedSection>
+      <AnimatedSection delay={0.3} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Who it&apos;s for
+        </h2>
+        <p className="text-gray-400 leading-relaxed max-w-3xl">
+          Recruiters, HR teams, and growing companies that need better tools for hiring and people operations. We build custom or integrated solutions that fit your process and scale.
+        </p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.4}>
+        <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#00D9FF]/10 via-[#B026FF]/10 to-[#FF0066]/10 border border-[#00D9FF]/30 text-center">
+          <Users className="w-12 h-12 text-[#00D9FF] mx-auto mb-4" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            Ready to streamline hiring and HR?
+          </h2>
+          <p className="text-gray-400 mb-6 max-w-xl mx-auto">
+            Tell us your workflow and we&apos;ll propose a solution that fits.
+          </p>
+          <Link href="/get-started?service=recruitment-hr-tools">
+            <GradientButton variant="primary" size="lg">
+              Get started
+            </GradientButton>
+          </Link>
+        </div>
+      </AnimatedSection>
+    </>
+  );
+}
+
+function EcommerceMarketplacesContent() {
+  return (
+    <>
+      <AnimatedSection className="mb-16">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 gradient-text">
+          E-Commerce & Marketplaces
+        </h1>
+        <p className="text-xl text-gray-400 max-w-3xl mb-8">
+          Online stores and marketplaces with payments, inventory, and a smooth buyer and seller experience.
+        </p>
+        <Link href="/get-started?service=ecommerce-marketplaces">
+          <GradientButton variant="primary" size="lg">
+            Get started
+          </GradientButton>
+        </Link>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Why it matters
+        </h2>
+        <p className="text-gray-400 leading-relaxed mb-8 max-w-3xl">
+          E-commerce and marketplaces need more than a pretty storefront. Payments, inventory, fulfilment, and a great experience for buyers (and sellers, for marketplaces) are what drive sales and retention.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            "Secure payments and checkout",
+            "Inventory and order management",
+            "Smooth buyer and seller experience",
+            "Scalable and reliable infrastructure",
+            "Integrations with shipping and tools",
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-[#0f0f1a]/80 border border-white/10">
+              <CheckCircle className="w-5 h-5 text-[#00D9FF] shrink-0 mt-0.5" />
+              <span className="text-gray-300 text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+      <AnimatedSection delay={0.2} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          What we do for you
+        </h2>
+        <ul className="space-y-4 max-w-3xl">
+          {[
+            "Online store design and build: products, cart, checkout, and payments.",
+            "Marketplace platforms: multi-seller, listings, and commissions.",
+            "Inventory, orders, and fulfilment workflows.",
+            "Integrations: payment gateways, shipping, and analytics.",
+            "Ongoing support and scaling as you grow.",
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3 text-gray-400">
+              <span className="text-[#00D9FF] font-bold shrink-0">{(i + 1).toString()}.</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </AnimatedSection>
+      <AnimatedSection delay={0.3} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Who it&apos;s for
+        </h2>
+        <p className="text-gray-400 leading-relaxed max-w-3xl">
+          Brands and businesses that want to sell online or run a marketplace. We build stores and platforms with payments, inventory, and a smooth experience for buyers and sellers.
+        </p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.4}>
+        <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#00D9FF]/10 via-[#B026FF]/10 to-[#FF0066]/10 border border-[#00D9FF]/30 text-center">
+          <ShoppingCart className="w-12 h-12 text-[#00D9FF] mx-auto mb-4" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            Ready to sell online?
+          </h2>
+          <p className="text-gray-400 mb-6 max-w-xl mx-auto">
+            Tell us your product and audience — we&apos;ll propose a store or marketplace that fits.
+          </p>
+          <Link href="/get-started?service=ecommerce-marketplaces">
+            <GradientButton variant="primary" size="lg">
+              Get started
+            </GradientButton>
+          </Link>
+        </div>
+      </AnimatedSection>
+    </>
+  );
+}
+
+function SaaSDevelopmentContent() {
+  return (
+    <>
+      <AnimatedSection className="mb-16">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 gradient-text">
+          SaaS Development
+        </h1>
+        <p className="text-xl text-gray-400 max-w-3xl mb-8">
+          End-to-end SaaS platforms: authentication, billing, dashboards, and scalable infrastructure so you can focus on growth.
+        </p>
+        <Link href="/get-started?service=saas-development">
+          <GradientButton variant="primary" size="lg">
+            Get started
+          </GradientButton>
+        </Link>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Why it matters
+        </h2>
+        <p className="text-gray-400 leading-relaxed mb-8 max-w-3xl">
+          SaaS products need auth, billing, dashboards, and infrastructure that scale. We build the full stack so you can focus on your product and customers, not reinventing the wheel.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            "Authentication and user management",
+            "Subscription and billing",
+            "Dashboards and admin tools",
+            "Scalable, secure infrastructure",
+            "APIs and integrations",
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-[#0f0f1a]/80 border border-white/10">
+              <CheckCircle className="w-5 h-5 text-[#00D9FF] shrink-0 mt-0.5" />
+              <span className="text-gray-300 text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+      <AnimatedSection delay={0.2} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          What we do for you
+        </h2>
+        <ul className="space-y-4 max-w-3xl">
+          {[
+            "Product design and architecture for your SaaS idea.",
+            "Auth, roles, and user management.",
+            "Subscription and payment integration (e.g. Stripe).",
+            "Dashboards, reporting, and admin panels.",
+            "APIs, integrations, and scalable hosting.",
+            "Ongoing development and support as you grow.",
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3 text-gray-400">
+              <span className="text-[#00D9FF] font-bold shrink-0">{(i + 1).toString()}.</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </AnimatedSection>
+      <AnimatedSection delay={0.3} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Who it&apos;s for
+        </h2>
+        <p className="text-gray-400 leading-relaxed max-w-3xl">
+          Startups and businesses building a software product. We handle the platform — auth, billing, dashboards, and infrastructure — so you can focus on features and growth.
+        </p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.4}>
+        <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#00D9FF]/10 via-[#B026FF]/10 to-[#FF0066]/10 border border-[#00D9FF]/30 text-center">
+          <Layers className="w-12 h-12 text-[#00D9FF] mx-auto mb-4" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            Ready to build your SaaS?
+          </h2>
+          <p className="text-gray-400 mb-6 max-w-xl mx-auto">
+            Share your vision and we&apos;ll propose an architecture and plan that scales.
+          </p>
+          <Link href="/get-started?service=saas-development">
+            <GradientButton variant="primary" size="lg">
+              Get started
+            </GradientButton>
+          </Link>
+        </div>
+      </AnimatedSection>
+    </>
+  );
+}
+
+function WebMobileAppsContent() {
+  return (
+    <>
+      <AnimatedSection className="mb-16">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 gradient-text">
+          Web & Mobile Apps
+        </h1>
+        <p className="text-xl text-gray-400 max-w-3xl mb-8">
+          Responsive web apps and native or cross-platform mobile apps built with modern stacks and best practices.
+        </p>
+        <Link href="/get-started?service=web-mobile-apps">
+          <GradientButton variant="primary" size="lg">
+            Get started
+          </GradientButton>
+        </Link>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Why it matters
+        </h2>
+        <p className="text-gray-400 leading-relaxed mb-8 max-w-3xl">
+          Users expect fast, reliable experiences on every device. Whether you need a responsive web app or a native or cross-platform mobile app, we build with modern stacks and best practices so your product performs.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            "Responsive web apps that work on any device",
+            "Native or cross-platform mobile apps",
+            "Modern stacks and best practices",
+            "Performance and accessibility",
+            "Ongoing support and updates",
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-[#0f0f1a]/80 border border-white/10">
+              <CheckCircle className="w-5 h-5 text-[#00D9FF] shrink-0 mt-0.5" />
+              <span className="text-gray-300 text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+      <AnimatedSection delay={0.2} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          What we do for you
+        </h2>
+        <ul className="space-y-4 max-w-3xl">
+          {[
+            "Web apps: responsive, fast, and built for your use case.",
+            "Mobile apps: native (iOS/Android) or cross-platform (e.g. React Native).",
+            "UI/UX aligned with your brand and users.",
+            "APIs, auth, and backend as needed.",
+            "Launch, app store support, and ongoing updates.",
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3 text-gray-400">
+              <span className="text-[#00D9FF] font-bold shrink-0">{(i + 1).toString()}.</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </AnimatedSection>
+      <AnimatedSection delay={0.3} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Who it&apos;s for
+        </h2>
+        <p className="text-gray-400 leading-relaxed max-w-3xl">
+          Businesses that need a web app or mobile app — from startups to enterprises. We build responsive web apps and native or cross-platform mobile apps with modern stacks and best practices.
+        </p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.4}>
+        <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#00D9FF]/10 via-[#B026FF]/10 to-[#FF0066]/10 border border-[#00D9FF]/30 text-center">
+          <Smartphone className="w-12 h-12 text-[#00D9FF] mx-auto mb-4" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            Ready to build your app?
+          </h2>
+          <p className="text-gray-400 mb-6 max-w-xl mx-auto">
+            Tell us your platform and goals — we&apos;ll propose a plan that fits.
+          </p>
+          <Link href="/get-started?service=web-mobile-apps">
+            <GradientButton variant="primary" size="lg">
+              Get started
+            </GradientButton>
+          </Link>
+        </div>
+      </AnimatedSection>
+    </>
+  );
+}
+
+function AnalyticsDashboardsContent() {
+  return (
+    <>
+      <AnimatedSection className="mb-16">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 gradient-text">
+          Analytics & Dashboards
+        </h1>
+        <p className="text-xl text-gray-400 max-w-3xl mb-8">
+          Real-time data visualization, custom reports, and business intelligence tools that drive decisions.
+        </p>
+        <Link href="/get-started?service=analytics-dashboards">
+          <GradientButton variant="primary" size="lg">
+            Get started
+          </GradientButton>
+        </Link>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Why it matters
+        </h2>
+        <p className="text-gray-400 leading-relaxed mb-8 max-w-3xl">
+          Data is only useful when you can see it and act on it. Dashboards and custom reports turn your data into clear visuals and insights so you can make better decisions, spot trends, and track what matters.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            "Real-time and historical data in one place",
+            "Custom reports and visualisations",
+            "KPIs and metrics that matter to you",
+            "Integrations with your existing tools",
+            "Business intelligence that drives decisions",
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-[#0f0f1a]/80 border border-white/10">
+              <CheckCircle className="w-5 h-5 text-[#00D9FF] shrink-0 mt-0.5" />
+              <span className="text-gray-300 text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+      <AnimatedSection delay={0.2} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          What we do for you
+        </h2>
+        <ul className="space-y-4 max-w-3xl">
+          {[
+            "Dashboard design and build: KPIs, charts, and filters.",
+            "Data pipelines and integrations (APIs, DBs, spreadsheets).",
+            "Custom reports and scheduled exports.",
+            "Real-time or near-real-time updates where needed.",
+            "Training and documentation so your team can use it.",
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3 text-gray-400">
+              <span className="text-[#00D9FF] font-bold shrink-0">{(i + 1).toString()}.</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </AnimatedSection>
+      <AnimatedSection delay={0.3} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Who it&apos;s for
+        </h2>
+        <p className="text-gray-400 leading-relaxed max-w-3xl">
+          Teams and businesses that need to see their data clearly. We build dashboards, reports, and BI tools that connect to your sources and surface the metrics that drive your decisions.
+        </p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.4}>
+        <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#00D9FF]/10 via-[#B026FF]/10 to-[#FF0066]/10 border border-[#00D9FF]/30 text-center">
+          <BarChart3 className="w-12 h-12 text-[#00D9FF] mx-auto mb-4" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            Ready to see your data clearly?
+          </h2>
+          <p className="text-gray-400 mb-6 max-w-xl mx-auto">
+            Tell us your data sources and KPIs — we&apos;ll propose a dashboard or report solution.
+          </p>
+          <Link href="/get-started?service=analytics-dashboards">
+            <GradientButton variant="primary" size="lg">
+              Get started
+            </GradientButton>
+          </Link>
+        </div>
+      </AnimatedSection>
+    </>
+  );
+}
+
 export default function ServiceDetailPage() {
   const params = useParams();
   const slug = typeof params.slug === "string" ? params.slug : params.slug?.[0];
@@ -536,6 +1323,15 @@ export default function ServiceDetailPage() {
         {slug === "google-ads-ppc" && <GoogleAdsPPCContent />}
         {slug === "google-local-services-ads" && <GoogleLocalServicesAdsContent />}
         {slug === "web-design" && <WebDesignContent />}
+        {slug === "website-audits" && <WebsiteAuditsContent />}
+        {slug === "other-marketing-services" && <OtherMarketingServicesContent />}
+        {slug === "website-maintenance" && <WebsiteMaintenanceContent />}
+        {slug === "consulting-strategy" && <ConsultingStrategyContent />}
+        {slug === "recruitment-hr-tools" && <RecruitmentHRToolsContent />}
+        {slug === "ecommerce-marketplaces" && <EcommerceMarketplacesContent />}
+        {slug === "saas-development" && <SaaSDevelopmentContent />}
+        {slug === "web-mobile-apps" && <WebMobileAppsContent />}
+        {slug === "analytics-dashboards" && <AnalyticsDashboardsContent />}
       </div>
     </div>
   );

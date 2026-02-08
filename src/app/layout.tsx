@@ -115,7 +115,7 @@ export const metadata: Metadata = {
       "InventiveByte LLC builds, launches, and scales SaaS platforms and digital brands from Montana, USA.",
     images: [
       {
-        url: `${siteUrl}/inventivebyte-logo.png`,
+        url: `${siteUrl}/inventivebyte-logo2.png`,
         width: 1200,
         height: 630,
         alt: "Inventive Byte - Innovation Meets Excellence",
@@ -127,7 +127,7 @@ export const metadata: Metadata = {
     title: "InventiveByte LLC | SaaS & Digital Brands from Montana",
     description:
       "InventiveByte LLC builds, launches, and scales SaaS platforms and digital brands from Montana, USA.",
-    images: [`${siteUrl}/inventivebyte-logo.png`],
+    images: [`${siteUrl}/inventivebyte-logo2.png`],
   },
 };
 

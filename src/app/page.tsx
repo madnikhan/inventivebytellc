@@ -33,9 +33,9 @@ export default function Home() {
       />
 
       {/* At a glance — clear summary for users and AI/search */}
-      <AnimatedSection className="px-6 pb-10">
+      <AnimatedSection className="py-20 px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-center text-sm font-semibold uppercase tracking-wider text-[#00D9FF]/90 mb-4">
+          <h2 className="text-center text-xl md:text-2xl font-semibold uppercase tracking-wider text-[#00D9FF]/90 mb-6">
             What We Do
           </h2>
           <div className="p-5 md:p-6 rounded-2xl bg-[#0f0f1a]/80 border border-[#00D9FF]/20 shadow-lg shadow-[#00D9FF]/5">

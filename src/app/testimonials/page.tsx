@@ -104,7 +104,7 @@ export default function TestimonialsPage() {
             className="text-center p-8 rounded-2xl bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] border border-white/10"
           >
             <div className="text-4xl font-bold gradient-text mb-2">
-              {testimonials.length}+
+              50+
             </div>
             <div className="text-gray-400">Total Testimonials</div>
           </motion.div>

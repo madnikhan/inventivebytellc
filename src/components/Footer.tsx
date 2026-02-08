@@ -96,7 +96,7 @@ export default function Footer() {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-white/10">
           <div className="text-gray-400 text-sm md:text-base">
-            © 2025 InventiveByte LLC — Registered in Montana, USA. All rights reserved.
+            © {new Date().getFullYear()} InventiveByte LLC — Registered in Montana, USA. All rights reserved.
           </div>
           <div className="flex items-center gap-4">
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition-all hover:scale-110 hover:text-[#00D9FF] text-gray-400">

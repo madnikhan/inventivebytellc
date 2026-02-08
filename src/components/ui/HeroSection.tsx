@@ -58,7 +58,7 @@ export default function HeroSection({
         )}
 
         {(primaryCTA || secondaryCTA) && (
-          <div className="hero-fade-in hero-fade-in-delay-3 flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="hero-fade-in hero-fade-in-delay-3 flex flex-col sm:flex-row gap-4 justify-center items-center mb-20">
             {primaryCTA && (
               <Link href={primaryCTA.href}>
                 <GradientButton variant="primary" size="lg">
@@ -77,8 +77,8 @@ export default function HeroSection({
         )}
       </div>
 
-      {/* Scroll Indicator - CSS animation only */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 hero-fade-in hero-fade-in-delay-4">
+      {/* Scroll Indicator - CSS animation only, clear of buttons */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hero-fade-in hero-fade-in-delay-4">
         <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
           <div className="animate-scroll-bounce w-1 h-3 bg-white/50 rounded-full mt-2" />
         </div>

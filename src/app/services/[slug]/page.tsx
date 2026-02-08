@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { ArrowLeft, MapPin, CheckCircle, Search, Building2, Layout } from "lucide-react";
+import { ArrowLeft, MapPin, CheckCircle, Search, Building2, Layout, Megaphone } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import GradientButton from "@/components/ui/GradientButton";
@@ -12,6 +12,7 @@ const SERVICE_SLUGS: Record<string, boolean> = {
   "seo": true,
   "google-local-services-ads": true,
   "web-design": true,
+  "google-ads-ppc": true,
 };
 
 const SLUG_TO_TITLE: Record<string, string> = {
@@ -19,6 +20,7 @@ const SLUG_TO_TITLE: Record<string, string> = {
   "seo": "SEO",
   "google-local-services-ads": "Google Local Services Ads",
   "web-design": "Web Design",
+  "google-ads-ppc": "Google Ads & PPC",
 };
 
 function GoogleBusinessProfileContent() {
@@ -392,6 +394,98 @@ function WebDesignContent() {
   );
 }
 
+function GoogleAdsPPCContent() {
+  return (
+    <>
+      <AnimatedSection className="mb-16">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 gradient-text">
+          Google Ads & PPC
+        </h1>
+        <p className="text-xl text-gray-400 max-w-3xl mb-8">
+          Paid search and display campaigns that bring in qualified traffic. We handle setup, targeting, and ongoing optimisation.
+        </p>
+        <Link href="/get-started?service=google-ads-ppc">
+          <GradientButton variant="primary" size="lg">
+            Get started
+          </GradientButton>
+        </Link>
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.1} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Why paid search works
+        </h2>
+        <p className="text-gray-400 leading-relaxed mb-8 max-w-3xl">
+          When people search for what you offer, paid ads put you in front of them at the moment they’re ready to act. Unlike organic search, you control where you appear and can scale up or down by budget. Done well, Google Ads and display campaigns drive qualified traffic and measurable leads or sales.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            "Reach people actively searching for your products or services",
+            "Control budget, targeting, and messaging",
+            "Fast visibility — no waiting for SEO to build",
+            "Clear reporting on clicks, conversions, and ROI",
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="flex items-start gap-3 p-4 rounded-xl bg-[#0f0f1a]/80 border border-white/10"
+            >
+              <CheckCircle className="w-5 h-5 text-[#00D9FF] shrink-0 mt-0.5" />
+              <span className="text-gray-300 text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.2} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          What we do for you
+        </h2>
+        <ul className="space-y-4 max-w-3xl">
+          {[
+            "Campaign setup: Search, Display, or both, aligned with your goals and budget.",
+            "Keyword research and targeting so your ads show for the right searches.",
+            "Ad copy and creatives that stand out and drive clicks.",
+            "Bidding and budget management for the best return.",
+            "Ongoing optimisation: tests, adjustments, and scaling what works.",
+            "Reporting and insights so you see performance and ROI.",
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3 text-gray-400">
+              <span className="text-[#00D9FF] font-bold shrink-0">{(i + 1).toString()}.</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.3} className="mb-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Who it’s for
+        </h2>
+        <p className="text-gray-400 leading-relaxed max-w-3xl">
+          Businesses that want to grow leads or sales quickly and are ready to invest in paid traffic. We work with local and regional businesses across London, Birmingham, Coventry, Warwick, Leamington Spa, Kenilworth, and beyond. Whether you’re new to Google Ads or want to improve existing campaigns, we’ll set up and optimise so you get qualified traffic. Meetings are online-first.
+        </p>
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.4}>
+        <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#00D9FF]/10 via-[#B026FF]/10 to-[#FF0066]/10 border border-[#00D9FF]/30 text-center">
+          <Megaphone className="w-12 h-12 text-[#00D9FF] mx-auto mb-4" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+            Ready to grow with paid campaigns?
+          </h2>
+          <p className="text-gray-400 mb-6 max-w-xl mx-auto">
+            Tell us your goals and budget. We’ll propose a plan for setup, targeting, and ongoing optimisation.
+          </p>
+          <Link href="/get-started?service=google-ads-ppc">
+            <GradientButton variant="primary" size="lg">
+              Get started
+            </GradientButton>
+          </Link>
+        </div>
+      </AnimatedSection>
+    </>
+  );
+}
+
 export default function ServiceDetailPage() {
   const params = useParams();
   const slug = typeof params.slug === "string" ? params.slug : params.slug?.[0];
@@ -439,6 +533,7 @@ export default function ServiceDetailPage() {
 
         {slug === "google-business-profiles" && <GoogleBusinessProfileContent />}
         {slug === "seo" && <SEOContent />}
+        {slug === "google-ads-ppc" && <GoogleAdsPPCContent />}
         {slug === "google-local-services-ads" && <GoogleLocalServicesAdsContent />}
         {slug === "web-design" && <WebDesignContent />}
       </div>

@@ -20,6 +20,7 @@ const serviceSubmenu = [
   { href: "/services", label: "All services" },
   { href: "/services/google-business-profiles", label: "Google Business Profile" },
   { href: "/services/seo", label: "SEO" },
+  { href: "/services/google-ads-ppc", label: "Google Ads & PPC" },
   { href: "/services/google-local-services-ads", label: "Google Local Services Ads" },
   { href: "/services/web-design", label: "Web Design" },
 ];

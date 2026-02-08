@@ -69,6 +69,7 @@ const services = [
   {
     icon: Megaphone,
     title: "Google Ads & PPC",
+    slug: "google-ads-ppc",
     description:
       "Paid search and display campaigns that bring in qualified traffic. We handle setup, targeting, and ongoing optimisation.",
   },

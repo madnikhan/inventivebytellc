@@ -16,6 +16,7 @@ const interestOptions = [
   { value: "mobile-app", label: "Mobile App" },
   { value: "google-business-profiles", label: "Google Business Profile" },
   { value: "seo", label: "SEO" },
+  { value: "google-ads-ppc", label: "Google Ads & PPC" },
   { value: "google-local-services-ads", label: "Google Local Services Ads" },
   { value: "web-design", label: "Web Design" },
   { value: "consultation", label: "Free Consultation" },
@@ -124,11 +125,13 @@ function GetStartedContent() {
             ? "Get started with Google Business Profile management. Tell us about your business and we'll be in touch."
             : serviceParam === "seo"
               ? "Get started with SEO. Share your goals and we&apos;ll propose a plan that fits."
-              : serviceParam === "google-local-services-ads"
-                ? "Get started with Google Local Services Ads. We&apos;ll check eligibility and walk you through setup."
-                : serviceParam === "web-design"
-                  ? "Get started with web design. Tell us about your project and we&apos;ll send a tailored quote."
-                  : "Ready to bring your idea to life? Let&apos;s start the conversation and explore how we can help."}
+              : serviceParam === "google-ads-ppc"
+                ? "Get started with Google Ads & PPC. Tell us your goals and we&apos;ll propose a plan for paid campaigns."
+                : serviceParam === "google-local-services-ads"
+                  ? "Get started with Google Local Services Ads. We&apos;ll check eligibility and walk you through setup."
+                  : serviceParam === "web-design"
+                    ? "Get started with web design. Tell us about your project and we&apos;ll send a tailored quote."
+                    : "Ready to bring your idea to life? Let&apos;s start the conversation and explore how we can help."}
         </p>
       </AnimatedSection>
 

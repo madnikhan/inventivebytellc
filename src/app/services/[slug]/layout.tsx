@@ -11,6 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     "seo": "SEO for Small Businesses | Services | InventiveByte LLC",
     "google-local-services-ads": "Google Local Services Ads | Services | InventiveByte LLC",
     "web-design": "Web Design | Services | InventiveByte LLC",
+    "google-ads-ppc": "Google Ads & PPC | Services | InventiveByte LLC",
   };
   const descriptions: Record<string, string> = {
     "google-business-profiles":
@@ -21,6 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "Google Local Services Ads — pay-per-lead, Google Verified ads for local service businesses. Get more calls and messages. Get started today.",
     "web-design":
       "Professional web design: mobile-friendly, SEO-optimised sites that convert. From landing pages to full websites. Get started today.",
+    "google-ads-ppc":
+      "Paid search and display campaigns that bring in qualified traffic. Setup, targeting, and ongoing optimisation. Get started today.",
   };
   if (titles[slug]) {
     return {

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   NavigationMenu,
@@ -47,16 +46,17 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full glass-effect border-b border-white/10 shadow-lg font-sans">
       <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-4 py-5">
-        {/* Logo - your PNG, full brightness so it's visible on dark nav */}
+        {/* Logo - native img for reliable loading from public */}
         <Link href="/" className="flex items-center flex-shrink-0 mr-4 group" aria-label="InventiveByte Home">
-          <span className="relative flex items-center justify-center rounded-lg overflow-hidden border border-white/15 bg-white/5 px-2 py-1.5 transition-all group-hover:border-[#00D9FF]/40 group-hover:shadow-[0_0_20px_rgba(0,217,255,0.15)]">
-            <Image
+          <span className="relative flex items-center justify-center rounded-lg overflow-hidden border border-white/15 bg-white/5 px-2 py-1 transition-all group-hover:border-[#00D9FF]/40 group-hover:shadow-[0_0_20px_rgba(0,217,255,0.15)]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/inventivebyte-logo.png"
               alt="InventiveByte LLC"
-              width={160}
-              height={44}
-              className="h-11 w-auto object-contain drop-shadow-sm"
-              priority
+              width={280}
+              height={72}
+              className="h-14 md:h-16 w-auto min-h-[3rem] object-contain object-center drop-shadow-sm"
+              fetchPriority="high"
             />
           </span>
         </Link>

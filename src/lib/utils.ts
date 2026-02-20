@@ -30,6 +30,24 @@ export function normalizeVideoUrl(url: string | undefined): string | undefined {
   return input;
 }
 
+/** Strip markdown to plain text for previews (e.g. card excerpts). */
+export function stripMarkdown(md: string | undefined): string {
+  if (!md || typeof md !== "string") return "";
+  return md
+    .replace(/^#{1,6}\s+/gm, "") // headings
+    .replace(/\*\*(.+?)\*\*/g, "$1") // bold
+    .replace(/\*(.+?)\*/g, "$1") // italic
+    .replace(/__(.+?)__/g, "$1")
+    .replace(/_(.+?)_/g, "$1")
+    .replace(/^[-*+]\s+/gm, "") // list bullets
+    .replace(/^\d+\.\s+/gm, "") // numbered lists
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // links
+    .replace(/`([^`]+)`/g, "$1") // inline code
+    .replace(/^>\s+/gm, "") // blockquote
+    .replace(/\n{2,}/g, " ") // collapse newlines
+    .trim();
+}
+
 /** True if URL is a direct video file (e.g. Sanity CDN, .mp4, .webm). Use native <video> for these. */
 export function isDirectVideoUrl(url: string | undefined): boolean {
   if (!url || typeof url !== "string") return false;

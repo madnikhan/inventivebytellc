@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ExternalLink, Github, Calendar } from "lucide-react";
 import Image from "next/image";
 import TechStackBadge from "./TechStackBadge";
+import { stripMarkdown } from "@/lib/utils";
 import { PortfolioProject } from "@/data/portfolio";
 
 interface PortfolioCardProps {
@@ -67,7 +68,9 @@ export default function PortfolioCard({ project, index = 0 }: PortfolioCardProps
           </h3>
         </div>
 
-        <p className="text-gray-400 text-sm mb-4 line-clamp-2">{project.description}</p>
+        <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+          {stripMarkdown(project.description) || project.description}
+        </p>
 
         {/* Tech Stack */}
         <div className="flex flex-wrap gap-2 mb-4">

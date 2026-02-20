@@ -67,7 +67,7 @@ export interface SanityResource {
 // Lazy Sanity client creation - only create if projectId is configured
 let sanityClient: ReturnType<typeof createClient> | null = null;
 
-function getSanityClient() {
+export function getSanityClient() {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   
   // Don't create client if projectId is missing (allows build to succeed without Sanity)
@@ -173,6 +173,28 @@ export const portfolioBySlugQuery = `*[_type == "portfolio" && slug.current == $
   featured
 }`;
 
+export const portfolioByIdQuery = `*[_id == $id][0] {
+  _id,
+  _type,
+  title,
+  slug,
+  description,
+  longDescription,
+  images[]{
+    _type,
+    asset,
+    alt
+  },
+  video,
+  "videoFileUrl": videoFile.asset->url,
+  websiteLink,
+  githubLink,
+  techStack,
+  category,
+  date,
+  featured
+}`;
+
 export const testimonialsQuery = `*[_type == "testimonial"] | order(_createdAt desc) {
   _id,
   _type,
@@ -255,6 +277,18 @@ export async function getPortfolioProjectBySlug(slug: string): Promise<SanityPor
     return project;
   } catch (error) {
     console.error('Error fetching portfolio project:', error);
+    return null;
+  }
+}
+
+export async function getPortfolioById(id: string): Promise<SanityPortfolioProject | null> {
+  try {
+    const client = getSanityClient();
+    if (!client) return null;
+    const project = await client.fetch<SanityPortfolioProject | null>(portfolioByIdQuery, { id });
+    return project && project._type === 'portfolio' ? project : null;
+  } catch (error) {
+    console.error('Error fetching portfolio by id:', error);
     return null;
   }
 }

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
+import { createOrUpdateResourceFromPortfolioId } from '@/lib/portfolio-to-blog';
 
 export const runtime = 'nodejs';
 
 export async function POST(req: NextRequest) {
   try {
-    // Verify webhook secret (optional but recommended)
     const secret = req.headers.get('x-sanity-webhook-secret');
     const expectedSecret = process.env.SANITY_WEBHOOK_SECRET;
 
@@ -18,12 +18,30 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json().catch(() => ({}));
     const _type = body?._type ?? body?.type;
+    const ids = body?.ids?.all ?? body?.ids ?? (body?._id ? [body._id] : body?.id ? [body.id] : []);
 
-    // Revalidate relevant pages based on content type (Sanity sends _type in webhook payload)
-    if (_type === 'portfolio') {
+    // When any doc changes, try to generate a blog from it if it's a portfolio (for each affected id)
+    if (process.env.SANITY_API_TOKEN && Array.isArray(ids) && ids.length > 0) {
+      for (const id of ids) {
+        try {
+          await createOrUpdateResourceFromPortfolioId(id);
+        } catch {
+          // No-op if not a portfolio doc or other error
+        }
+      }
       revalidatePath('/portfolio');
+      revalidatePath('/resources');
       revalidatePath('/');
       revalidateTag('portfolio');
+      revalidateTag('resources');
+    }
+
+    if (_type === 'portfolio') {
+      revalidatePath('/portfolio');
+      revalidatePath('/resources');
+      revalidatePath('/');
+      revalidateTag('portfolio');
+      revalidateTag('resources');
     } else if (_type === 'testimonial') {
       revalidatePath('/testimonials');
       revalidatePath('/');

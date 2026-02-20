@@ -29,6 +29,23 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Sanity: Auto-generate a blog from each portfolio project
+
+When you add or update a **Portfolio** document in Sanity Studio, the site can automatically create or update a **Resource** (blog post) with a full case study built from that portfolio.
+
+### Setup
+
+1. **Create a write token** in [Sanity Dashboard → API → Tokens](https://www.sanity.io/manage): add a token with **Editor** (or write) access and set it as `SANITY_API_TOKEN` in your env (e.g. `.env.local` and your hosting env).
+
+2. **Add a webhook** in [Sanity Dashboard → API → Webhooks](https://www.sanity.io/manage):
+   - **URL:** `https://your-domain.com/api/sanity/revalidate` (or your Vercel/host URL + `/api/sanity/revalidate`)
+   - **Trigger:** Document changed (create/update/delete)
+   - **Secret (optional):** set a value and add the same as `SANITY_WEBHOOK_SECRET` in your env
+
+When a portfolio is saved, the webhook calls the revalidate endpoint, which creates or updates a Resource with the same slug, title (suffix “– Case Study”), excerpt, and a markdown body (overview, about, tech stack, categories, links). The new post appears under **Resources** in Studio and on `/resources`.
+
+To generate a blog from a single portfolio without the webhook, send a POST to `/api/sanity/portfolio-to-blog` with body `{ "documentId": "<portfolio _id>" }` and (if set) header `x-sanity-webhook-secret`.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

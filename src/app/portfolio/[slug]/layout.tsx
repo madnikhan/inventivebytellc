@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getPortfolioProjectBySlug, convertSanityPortfolioToApp } from "@/lib/sanity";
 import { portfolioProjects } from "@/data/portfolio";
+import { stripMarkdown } from "@/lib/utils";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inventivebytellc.com";
 
@@ -36,8 +37,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const pageTitle = `${title} | Portfolio | InventiveByte LLC`;
+  const plainDesc = stripMarkdown(description) || description;
   const shortDescription =
-    description.length > 160 ? description.slice(0, 157) + "..." : description;
+    plainDesc.length > 160 ? plainDesc.slice(0, 157) + "..." : plainDesc;
 
   // First image as absolute URL for OG (Sanity CDN URLs are already absolute)
   const ogImageUrl =

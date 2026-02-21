@@ -41,12 +41,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const shortDescription =
     plainDesc.length > 160 ? plainDesc.slice(0, 157) + "..." : plainDesc;
 
-  // First image as absolute URL for OG (Sanity CDN URLs are already absolute)
-  const ogImageUrl =
-    images.length > 0
-      ? images[0].startsWith("http")
-        ? images[0]
-        : `${baseUrl}${images[0].startsWith("/") ? "" : "/"}${images[0]}`
+  // First valid image URL for OG (must be non-empty and absolute or path); fallback to site logo
+  const firstValidImage = (images || []).find(
+    (u) => typeof u === "string" && u.trim().length > 0
+  );
+  const ogImageUrl = firstValidImage
+    ? firstValidImage.startsWith("http")
+      ? firstValidImage
+      : `${baseUrl}${firstValidImage.startsWith("/") ? "" : "/"}${firstValidImage}`
+    : `${baseUrl}/inventivebyte-logo2.png`;
+  const safeOgImageUrl =
+    ogImageUrl && ogImageUrl.startsWith("http")
+      ? ogImageUrl
       : `${baseUrl}/inventivebyte-logo2.png`;
 
   const metadata: Metadata = {
@@ -61,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "website",
       images: [
         {
-          url: ogImageUrl,
+          url: safeOgImageUrl,
           width: 1200,
           height: 630,
           alt: `${title} - InventiveByte LLC Portfolio`,
@@ -80,7 +86,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: pageTitle,
       description: shortDescription,
-      images: [ogImageUrl],
+      images: [safeOgImageUrl],
     },
   };
 

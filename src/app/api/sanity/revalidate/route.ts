@@ -19,8 +19,14 @@ function normalizeWebhookIds(rawBody: unknown, body: Record<string, unknown> | n
   const o = (rawBody && typeof rawBody === 'object' ? rawBody : body) as Record<string, unknown> | null;
   if (!o) return [];
 
+  const idsVal = o.ids as { all?: unknown } | unknown;
+  const idsArray =
+    idsVal && typeof idsVal === 'object' && 'all' in idsVal
+      ? (idsVal as { all: unknown }).all
+      : idsVal;
+
   return (
-    arr(o.ids?.all ?? o.ids) ||
+    arr(idsArray) ||
     single(o._id ?? o.id ?? o.documentId) ||
     []
   );

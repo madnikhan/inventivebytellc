@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ProjectDetailContent from "@/components/portfolio/ProjectDetailContent";

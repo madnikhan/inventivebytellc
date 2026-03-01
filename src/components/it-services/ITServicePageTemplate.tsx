@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { ReactNode } from "react";
 import HeroSection from "@/components/ui/HeroSection";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import GradientButton from "@/components/ui/GradientButton";

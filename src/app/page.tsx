@@ -32,6 +32,23 @@ export default function Home() {
         }}
       />
 
+      {/* IT Services Section */}
+      <AnimatedSection className="py-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold gradient-text mb-4">
+            Professional IT Services & Computer Engineering
+          </h2>
+          <p className="text-lg md:text-xl text-gray-300 mb-8">
+            Inventive Byte LLC offers expert computer repair, laptop repair, custom gaming PC builds, software installation, and business IT support services across the UK.
+          </p>
+          <Link href="/it-services">
+            <GradientButton variant="primary" size="lg">
+              View IT Services
+            </GradientButton>
+          </Link>
+        </div>
+      </AnimatedSection>
+
       {/* At a glance — clear summary for users and AI/search */}
       <AnimatedSection className="py-20 px-6">
         <div className="max-w-3xl mx-auto">

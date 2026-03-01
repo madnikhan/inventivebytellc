@@ -38,11 +38,17 @@ When you add or update a **Portfolio** document in Sanity Studio, the site can a
 1. **Create a write token** in [Sanity Dashboard → API → Tokens](https://www.sanity.io/manage): add a token with **Editor** (or write) access and set it as `SANITY_API_TOKEN` in your env (e.g. `.env.local` and your hosting env).
 
 2. **Add a webhook** in [Sanity Dashboard → API → Webhooks](https://www.sanity.io/manage):
-   - **URL:** `https://your-domain.com/api/sanity/revalidate` (or your Vercel/host URL + `/api/sanity/revalidate`)
+   - **URL:** `https://your-domain.com/api/sanity/revalidate` (use your live site URL, e.g. `https://www.inventivebytellc.com/api/sanity/revalidate`)
    - **Trigger:** Document changed (create/update/delete)
+   - **Filter (optional):** `_type == "portfolio"` so only portfolio changes trigger the hook
+   - **Projection:** ensure the payload includes `_id` (e.g. `{ _id, _type }`) so the app can create the blog
    - **Secret (optional):** set a value and add the same as `SANITY_WEBHOOK_SECRET` in your env
 
+3. **Production:** Add `SANITY_API_TOKEN` (and `SANITY_WEBHOOK_SECRET` if used) to your hosting env (e.g. Vercel → Project → Settings → Environment Variables). Otherwise the webhook runs but blog creation is skipped.
+
 When a portfolio is saved, the webhook calls the revalidate endpoint, which creates or updates a Resource with the same slug, title (suffix “– Case Study”), excerpt, and a markdown body (overview, about, tech stack, categories, links). The new post appears under **Resources** in Studio and on `/resources`.
+
+**Portfolios already in Sanity:** To generate blogs for portfolios that were saved *before* the webhook was set up, run once: `npx tsx scripts/generate-blogs-from-portfolio.ts` (requires `SANITY_API_TOKEN` in `.env.local`). This creates or updates a Resource for every existing Portfolio document.
 
 To generate a blog from a single portfolio without the webhook, send a POST to `/api/sanity/portfolio-to-blog` with body `{ "documentId": "<portfolio _id>" }` and (if set) header `x-sanity-webhook-secret`.
 

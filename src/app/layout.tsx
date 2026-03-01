@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "../components/LayoutWrapper";
 import GoogleAdsConversion from "../components/analytics/GoogleAdsConversion";
+import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ const jsonLd = {
       name: "InventiveByte LLC",
       url: siteUrl,
       logo: { "@type": "ImageObject", url: `${siteUrl}/inventivebyte-logo.png` },
-      description: "InventiveByte LLC builds, launches, and scales SaaS platforms and digital brands from Montana, USA. Services include SaaS development, web and mobile apps, analytics and dashboards, e-commerce and marketplaces, recruitment and HR tools, and consulting. Based in Kalispell, Montana; works with startups and enterprises worldwide.",
+      description: "InventiveByte LLC builds, launches, and scales SaaS platforms and digital brands from Montana, USA. Services include SaaS development, web and mobile apps, analytics and dashboards, e-commerce and marketplaces, recruitment and HR tools, and consulting. Based in Kalispell, Montana; works with startups and enterprises worldwide. IT Services division offers computer repair, laptop repair, custom gaming PC builds, software installation, and business IT support across the United Kingdom.",
       address: {
         "@type": "PostalAddress",
         streetAddress: "1001 S. Main St. STE 600",
@@ -41,6 +42,19 @@ const jsonLd = {
         email: "info@inventivebytellc.com",
         contactType: "customer service",
       },
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": `${siteUrl}/#localbusiness-uk`,
+      name: "InventiveByte LLC",
+      url: siteUrl,
+      description: "IT support, computer repair, laptop repair, custom gaming PC builds, software installation, SSD upgrade, and business IT support across the United Kingdom.",
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "GB",
+      },
+      areaServed: "United Kingdom",
+      serviceType: ["IT support", "Computer repair", "Laptop repair", "Custom PC build", "Software installation", "SSD upgrade", "Business IT support", "Onsite IT support"],
     },
     {
       "@type": "WebSite",
@@ -153,6 +167,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <GoogleAdsConversion />
+        <GoogleAnalytics />
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>

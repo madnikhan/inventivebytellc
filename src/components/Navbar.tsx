@@ -24,6 +24,16 @@ const serviceSubmenu = [
   { href: "/services/web-design", label: "Web Design" },
 ];
 
+const itServicesSubmenu = [
+  { href: "/computer-repair", label: "Computer Repair" },
+  { href: "/laptop-repair", label: "Laptop Repair" },
+  { href: "/gaming-pc-build", label: "Custom Gaming PCs" },
+  { href: "/software-installation", label: "Software Installation" },
+  { href: "/ssd-upgrade", label: "SSD Upgrade" },
+  { href: "/business-it-support", label: "Business IT Support" },
+  { href: "/onsite-it-support", label: "Onsite IT Support" },
+];
+
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/portfolio", label: "Portfolio" },
@@ -41,8 +51,18 @@ const navLinkActive = "!bg-white/10 !text-white border-white/20";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [itServicesOpen, setItServicesOpen] = useState(false);
   const pathname = usePathname();
   const isServicesPage = pathname?.startsWith("/services");
+  const isITServicesPage =
+    pathname === "/it-services" ||
+    pathname === "/computer-repair" ||
+    pathname === "/laptop-repair" ||
+    pathname === "/gaming-pc-build" ||
+    pathname === "/software-installation" ||
+    pathname === "/ssd-upgrade" ||
+    pathname === "/business-it-support" ||
+    pathname === "/onsite-it-support";
   return (
     <nav className="sticky top-0 z-50 w-full glass-effect border-b border-white/10 shadow-lg font-sans">
       <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-4 py-5">
@@ -80,6 +100,39 @@ export default function Navbar() {
                 <NavigationMenuContent className="left-0 right-0 mx-auto min-w-[240px] rounded-2xl glass-effect py-2 shadow-xl mt-2">
                   <ul className="grid gap-0.5 px-2 py-1">
                     {serviceSubmenu.map((item) => (
+                      <li key={item.href}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            href={item.href}
+                            className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-300 transition-all duration-200 hover:!bg-white/10 hover:!text-white border-l-2 border-l-transparent hover:border-l-white/30 focus:!bg-white/10 focus:!text-white focus:border-l-white/30"
+                          >
+                            {item.label}
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger
+                  className={`min-w-0 px-5 py-2.5 h-auto text-lg font-semibold tracking-wide rounded-xl border bg-transparent transition-all duration-200 hover:!bg-white/10 hover:!text-white hover:!border-white/20 focus:!bg-white/10 focus:!text-white focus:!border-white/20 focus-visible:!ring-0 focus-visible:!ring-offset-0 focus-visible:!outline-none data-[state=open]:!bg-white/10 data-[state=open]:!text-white data-[state=open]:!border-white/20 [&>svg]:size-4 ${isITServicesPage ? "!bg-white/10 !text-white border-white/20" : "text-gray-300 border-transparent"}`}
+                >
+                  IT Services
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="left-0 right-0 mx-auto min-w-[240px] rounded-2xl glass-effect py-2 shadow-xl mt-2">
+                  <ul className="grid gap-0.5 px-2 py-1">
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href="/it-services"
+                          className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-300 transition-all duration-200 hover:!bg-white/10 hover:!text-white border-l-2 border-l-transparent hover:border-l-white/30 focus:!bg-white/10 focus:!text-white focus:border-l-white/30"
+                        >
+                          All IT Services
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    {itServicesSubmenu.map((item) => (
                       <li key={item.href}>
                         <NavigationMenuLink asChild>
                           <Link
@@ -156,6 +209,50 @@ export default function Navbar() {
                       <div className="overflow-hidden">
                         <div className="flex flex-col gap-1 pt-2 pb-1">
                           {serviceSubmenu.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              className="text-lg font-medium py-2 px-4 rounded-xl transition-colors text-gray-300 hover:text-[#00D9FF] hover:bg-white/10 w-full text-center"
+                              onClick={() => setOpen(false)}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-full">
+                    <button
+                      type="button"
+                      onClick={() => setItServicesOpen((o) => !o)}
+                      className="flex items-center justify-center gap-2 w-full text-2xl font-bold py-2 px-4 rounded-xl transition-colors text-white hover:text-[#00D9FF] hover:bg-white/10 focus:bg-white/20"
+                      aria-expanded={itServicesOpen}
+                      aria-controls="mobile-it-services-menu"
+                      id="mobile-it-services-trigger"
+                    >
+                      IT Services
+                      <ChevronDown
+                        className={`size-6 transition-transform duration-200 ${itServicesOpen ? "rotate-180" : ""}`}
+                        aria-hidden
+                      />
+                    </button>
+                    <div
+                      id="mobile-it-services-menu"
+                      role="region"
+                      aria-labelledby="mobile-it-services-trigger"
+                      className={`grid transition-[grid-template-rows] duration-200 ease-out ${itServicesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="flex flex-col gap-1 pt-2 pb-1">
+                          <Link
+                            href="/it-services"
+                            className="text-lg font-medium py-2 px-4 rounded-xl transition-colors text-gray-300 hover:text-[#00D9FF] hover:bg-white/10 w-full text-center"
+                            onClick={() => setOpen(false)}
+                          >
+                            All IT Services
+                          </Link>
+                          {itServicesSubmenu.map((item) => (
                             <Link
                               key={item.href}
                               href={item.href}

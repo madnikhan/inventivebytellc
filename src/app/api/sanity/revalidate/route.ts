@@ -4,6 +4,28 @@ import { createOrUpdateResourceFromPortfolioId } from '@/lib/portfolio-to-blog';
 
 export const runtime = 'nodejs';
 
+function normalizeWebhookIds(rawBody: unknown, body: Record<string, unknown> | null): string[] {
+  const single = (v: unknown): string[] =>
+    v && typeof v === 'string' ? [v] : [];
+  const arr = (v: unknown): string[] =>
+    Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [];
+
+  if (Array.isArray(rawBody)) {
+    return rawBody
+      .map((item) => (item && typeof item === 'object' && '_id' in item ? (item as { _id: string })._id : null))
+      .filter((x): x is string => typeof x === 'string');
+  }
+
+  const o = (rawBody && typeof rawBody === 'object' ? rawBody : body) as Record<string, unknown> | null;
+  if (!o) return [];
+
+  return (
+    arr(o.ids?.all ?? o.ids) ||
+    single(o._id ?? o.id ?? o.documentId) ||
+    []
+  );
+}
+
 export async function POST(req: NextRequest) {
   try {
     const secret = req.headers.get('x-sanity-webhook-secret');
@@ -16,17 +38,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const body = await req.json().catch(() => ({}));
-    const _type = body?._type ?? body?.type;
-    const ids = body?.ids?.all ?? body?.ids ?? (body?._id ? [body._id] : body?.id ? [body.id] : []);
+    const rawBody = await req.json().catch(() => ({}));
+    const body = Array.isArray(rawBody) ? rawBody[0] : rawBody;
+    const _type = body?._type ?? body?.type ?? rawBody?._type ?? rawBody?.type;
+    const ids = normalizeWebhookIds(rawBody, body);
+
+    if (!process.env.SANITY_API_TOKEN && (Array.isArray(ids) ? ids.length > 0 : true)) {
+      console.warn('[revalidate] SANITY_API_TOKEN not set – skipping auto blog from portfolio');
+    }
 
     // When any doc changes, try to generate a blog from it if it's a portfolio (for each affected id)
     if (process.env.SANITY_API_TOKEN && Array.isArray(ids) && ids.length > 0) {
       for (const id of ids) {
         try {
           await createOrUpdateResourceFromPortfolioId(id);
-        } catch {
-          // No-op if not a portfolio doc or other error
+        } catch (e) {
+          console.error('[revalidate] portfolio-to-blog failed for', id, e);
         }
       }
       revalidatePath('/portfolio');

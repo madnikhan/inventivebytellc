@@ -97,7 +97,7 @@ export default function Navbar() {
                 >
                   Services
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="left-0 right-0 mx-auto min-w-[240px] rounded-2xl glass-effect py-2 shadow-xl mt-2">
+                <NavigationMenuContent className="mx-auto min-w-[240px] w-[260px] rounded-2xl glass-effect py-2 shadow-xl mt-2">
                   <ul className="grid gap-0.5 px-2 py-1">
                     {serviceSubmenu.map((item) => (
                       <li key={item.href}>
@@ -120,7 +120,7 @@ export default function Navbar() {
                 >
                   IT Services
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="left-0 right-0 mx-auto min-w-[240px] rounded-2xl glass-effect py-2 shadow-xl mt-2">
+                <NavigationMenuContent className="mx-auto min-w-[240px] w-[260px] rounded-2xl glass-effect py-2 shadow-xl mt-2">
                   <ul className="grid gap-0.5 px-2 py-1">
                     <li>
                       <NavigationMenuLink asChild>

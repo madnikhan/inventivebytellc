@@ -82,7 +82,7 @@ export default function Navbar() {
         </Link>
         {/* Desktop Nav */}
         <div className="hidden md:flex flex-1 justify-center">
-          <NavigationMenu className="[&_[data-slot=navigation-menu-viewport]]:!bg-transparent [&_[data-slot=navigation-menu-viewport]]:!border-0 [&_[data-slot=navigation-menu-viewport]]:!shadow-none">
+          <NavigationMenu viewport={false} className="[&_[data-slot=navigation-menu-viewport]]:!bg-transparent [&_[data-slot=navigation-menu-viewport]]:!border-0 [&_[data-slot=navigation-menu-viewport]]:!shadow-none">
             <NavigationMenuList className="gap-1">
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
@@ -97,7 +97,7 @@ export default function Navbar() {
                 >
                   Services
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="mx-auto min-w-[240px] w-[260px] rounded-2xl glass-effect py-2 shadow-xl mt-2">
+                <NavigationMenuContent className="left-1/2 -translate-x-1/2 min-w-[240px] w-[260px] rounded-2xl glass-effect py-2 shadow-xl mt-2">
                   <ul className="grid gap-0.5 px-2 py-1">
                     {serviceSubmenu.map((item) => (
                       <li key={item.href}>
@@ -120,7 +120,7 @@ export default function Navbar() {
                 >
                   IT Services
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="mx-auto min-w-[240px] w-[260px] rounded-2xl glass-effect py-2 shadow-xl mt-2">
+                <NavigationMenuContent className="left-1/2 -translate-x-1/2 min-w-[240px] w-[260px] rounded-2xl glass-effect py-2 shadow-xl mt-2">
                   <ul className="grid gap-0.5 px-2 py-1">
                     <li>
                       <NavigationMenuLink asChild>
